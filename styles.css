@@ -259,6 +259,33 @@ a { color: inherit; text-decoration: none; }
   width: 100%; height: 58px; border: 1px solid #d9dff0; border-radius: 10px; padding: 0 18px; background: #fff; color: #1f2944;
 }
 .row-between { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.auth-divider {
+  margin: 28px 0;
+  color: var(--muted);
+}
+.auth-divider span {
+  height: 1px;
+  background: var(--line);
+  flex: 1;
+}
+.auth-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  color: #34405f;
+  font-weight: 800;
+  line-height: 1.7;
+}
+.auth-page button.outline-btn {
+  border: 1px solid #d8cdfd;
+  background: #fff;
+}
+.auth-link {
+  padding: 0;
+  background: transparent;
+  font-weight: 900;
+}
 .login-left h2 { font-size: 30px; text-align: center; line-height: 1.45; }
 .login-left p { text-align: center; color: var(--muted); font-size: 18px; line-height: 1.8; }
 

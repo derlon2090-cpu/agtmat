@@ -773,4 +773,125 @@ function bindAdmin() {
   });
 }
 
+function login() {
+  return `<div class="bg-orbit"></div><main class="login-page auth-page" dir="rtl">
+    <section class="login-card">
+      ${brand()}<h1>تسجيل الدخول</h1><p>سجل دخولك للوصول إلى اجتماعاتك وإدارة فريقك بسهولة</p>
+      <form id="login-form">
+        <div class="field"><label>البريد الإلكتروني</label><input name="email" type="email" placeholder="name@company.com" required></div>
+        <div class="field"><label>كلمة المرور</label><input name="password" placeholder="••••••••••••" type="password" required></div>
+        <div class="row-between"><button class="auth-link gradient-text" type="button" data-auth-demo>نسيت كلمة المرور؟</button><label><input type="checkbox" checked> تذكرني</label></div>
+        <button class="primary-btn" style="width:100%;margin:22px 0" type="submit">تسجيل الدخول</button>
+      </form>
+      <a class="outline-btn" style="width:100%" href="#/signup">إنشاء حساب جديد</a>
+      <div class="row-between auth-divider"><span></span>أو<span></span></div>
+      <button class="outline-btn" style="width:100%" type="button" data-auth-demo>G المتابعة بحساب العمل</button>
+      <p>${icons.shield} دخول آمن ومشفر</p>
+    </section>
+    <section class="login-left"><h2><span class="gradient-text">اجتماعات أكثر إنتاجية.</span><br>تواصل أوضح. فرق أقوى.</h2><p>من مكالمات الفيديو إلى إدارة المهام والتقويم، كل ما تحتاجه في منصة واحدة متكاملة.</p><div class="meeting-stage">${videoMockup()}${scheduleCard()}</div></section>
+  </main>`;
+}
+
+function signup() {
+  return `<div class="bg-orbit"></div><main class="login-page auth-page signup-page" dir="rtl">
+    <section class="login-card">
+      ${brand()}<h1>إنشاء حساب جديد</h1><p>ابدأ مساحة Vexwyn لفريقك خلال لحظات.</p>
+      <form id="signup-form">
+        <div class="field"><label>الاسم الكامل</label><input name="name" placeholder="أحمد خالد" required></div>
+        <div class="field"><label>البريد الإلكتروني</label><input name="email" type="email" placeholder="name@company.com" required></div>
+        <div class="field"><label>اسم الفريق أو الشركة</label><input name="team" placeholder="فريق المشروع" required></div>
+        <div class="field"><label>كلمة المرور</label><input name="password" placeholder="••••••••••••" type="password" minlength="6" required></div>
+        <label class="auth-check"><input type="checkbox" required> أوافق على شروط الاستخدام وسياسة الخصوصية</label>
+        <button class="primary-btn" style="width:100%;margin:20px 0 12px" type="submit">إنشاء الحساب والدخول</button>
+      </form>
+      <a class="outline-btn" style="width:100%" href="#/login">لدي حساب بالفعل</a>
+      <p>${icons.shield} تجربة آمنة ومشفرة</p>
+    </section>
+    <section class="login-left"><h2><span class="gradient-text">ابدأ مجانا.</span><br>نظم اجتماعاتك وملفاتك من مكان واحد.</h2><p>سيتم إنشاء مساحة تجريبية لك مباشرة، ويمكنك تعديل بيانات الفريق لاحقا من الإعدادات.</p><div class="meeting-stage">${videoMockup()}${scheduleCard()}</div></section>
+  </main>`;
+}
+
+function bindAuth() {
+  const loginForm = document.getElementById("login-form");
+  if (loginForm) {
+    loginForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      localStorage.setItem("vexwyn-user-session", JSON.stringify({ type: "login", createdAt: new Date().toISOString() }));
+      location.hash = "#/app";
+    });
+  }
+
+  const signupForm = document.getElementById("signup-form");
+  if (signupForm) {
+    signupForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(signupForm);
+      localStorage.setItem("vexwyn-user-session", JSON.stringify({
+        type: "signup",
+        name: data.get("name"),
+        email: data.get("email"),
+        team: data.get("team"),
+        createdAt: new Date().toISOString()
+      }));
+      location.hash = "#/app";
+    });
+  }
+
+  document.querySelectorAll("[data-auth-demo]").forEach((button) => {
+    button.addEventListener("click", () => {
+      localStorage.setItem("vexwyn-user-session", JSON.stringify({ type: "work-account", createdAt: new Date().toISOString() }));
+      location.hash = "#/app";
+    });
+  });
+}
+
+function publicHeader(active = "") {
+  return `
+    <header class="public-header vx-header">
+      ${brand()}
+      <nav class="public-nav">
+        <button class="nav-link ${active==="products"?"active":""}" data-mega="products">المنتجات⌄</button>
+        <a class="nav-link ${active==="pricing"?"active":""}" href="#/pricing">الأسعار</a>
+        <button class="nav-link ${active==="resources"?"active":""}" data-mega="resources">الموارد⌄</button>
+        <button class="nav-link ${active==="company"?"active":""}" data-mega="company">الشركة</button>
+        <button class="nav-link ${active==="contact"?"active":""}" data-mega="contact">تواصل معنا</button>
+      </nav>
+      <div class="public-actions">
+        <span class="ghost-btn">العربية ◌</span>
+        <a class="ghost-btn" href="#/login">تسجيل الدخول</a>
+        <a class="primary-btn" href="#/signup">ابدأ مجانا</a>
+      </div>
+    </header>
+    <div id="mega-root"></div>
+  `;
+}
+
+function route() {
+  const directAdminPath = adminPath();
+  if (directAdminPath) {
+    const app = document.getElementById("app");
+    app.innerHTML = renderAdminRoute(directAdminPath);
+    bindAdmin();
+    return;
+  }
+  const hash = location.hash.replace("#", "") || "/";
+  const app = document.getElementById("app");
+  if (hash === "/" || hash === "") app.innerHTML = landing();
+  else if (hash === "/login") app.innerHTML = login();
+  else if (hash === "/signup") app.innerHTML = signup();
+  else if (hash === "/pricing") app.innerHTML = pricing(true);
+  else if (hash === "/app") app.innerHTML = dashboard();
+  else if (hash === "/app/meetings/room") app.innerHTML = meetingRoom();
+  else if (hash === "/app/meetings") app.innerHTML = meetings();
+  else if (hash === "/app/calendar") app.innerHTML = calendar();
+  else if (hash === "/app/messages") app.innerHTML = messages();
+  else if (hash === "/app/teams") app.innerHTML = teams();
+  else if (hash === "/app/files") app.innerHTML = files();
+  else if (hash === "/app/settings") app.innerHTML = settings();
+  else if (hash === "/app/billing") app.innerHTML = pricing(false);
+  else app.innerHTML = landing();
+  bindMega();
+  bindAuth();
+}
+
 route();
