@@ -546,8 +546,43 @@ window.addEventListener("hashchange", route);
 
 const VX_ADMIN_BASE = "/advanced-pro-control";
 const VX_ADMIN_EMAIL = "admin@vexwyn.com";
-const VX_ADMIN_PASSWORD = "Vexwyn@2026";
-const VX_ADMIN_MFA = "123456";
+const VX_ADMIN_PASSWORD = localStorage.getItem("VEXWYN_DEMO_ADMIN_PASSWORD") || "";
+const VX_ADMIN_MFA = localStorage.getItem("VEXWYN_DEMO_ADMIN_MFA") || "";
+const VX_API_URL = ((window.VEXWYN_API_URL || localStorage.getItem("VEXWYN_API_URL") || "") + "").replace(/\/$/, "");
+const VX_ENABLE_DEMO_DATA = window.VEXWYN_ENABLE_DEMO_DATA === true || localStorage.getItem("VEXWYN_ENABLE_DEMO_DATA") === "true";
+
+function vxApiReady() {
+  return Boolean(VX_API_URL);
+}
+
+async function vxApiFetch(path, options = {}) {
+  if (!vxApiReady()) {
+    throw new Error("VEXWYN_API_URL is not configured");
+  }
+
+  const response = await fetch(`${VX_API_URL}${path}`, {
+    ...options,
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+      ...(options.headers || {})
+    }
+  });
+
+  if (!response.ok) {
+    const body = await response.json().catch(() => ({}));
+    throw new Error(body.message || `API Error: ${response.status}`);
+  }
+
+  return response.json();
+}
+
+function vxFormatMetric(value, { money = false, percent = false } = {}) {
+  const number = Number(value || 0);
+  if (money) return `${number.toLocaleString("en-US")} SAR`;
+  if (percent) return `${number.toLocaleString("en-US")}%`;
+  return number.toLocaleString("en-US");
+}
 
 function brand() {
   return `<a class="brand" href="#/"><span class="mark" aria-hidden="true"></span><span>Vexwyn</span></a>`;
@@ -866,12 +901,198 @@ function publicHeader(active = "") {
   `;
 }
 
+function vxMetricCards(key) {
+  const cards = {
+    overview: [
+      ["إجمالي المستخدمين", "users.total", "👤"],
+      ["المستخدمون النشطون", "users.active", "👥"],
+      ["إجمالي الفرق", "teams.total", "♙"],
+      ["الاجتماعات المباشرة", "meetings.liveNow", "▣"],
+      ["الإيراد هذا الشهر", "billing.revenueThisMonth", "﷼", { money: true }],
+      ["تذاكر الدعم المفتوحة", "support.openTickets", "☏"]
+    ],
+    users: [
+      ["إجمالي المستخدمين", "total", "👥"],
+      ["النشطون", "active", "●"],
+      ["المعلقون", "suspended", "Ⅱ"],
+      ["بانتظار التفعيل", "pending", "◌"],
+      ["مسؤولو النظام", "admins", "👤"],
+      ["حسابات MFA", "mfaEnabled", "◈"]
+    ],
+    meetings: [
+      ["إجمالي الاجتماعات", "total", "▣"],
+      ["مباشر الآن", "liveNow", "●"],
+      ["مجدولة اليوم", "scheduledToday", "◷"]
+    ],
+    teams: [
+      ["إجمالي الفرق", "total", "♙"],
+      ["الفرق النشطة", "active", "●"]
+    ],
+    subscriptions: [
+      ["إجمالي الاشتراكات", "total", "▤"],
+      ["الاشتراكات النشطة", "active", "●"]
+    ],
+    invoices: [
+      ["إجمالي الفواتير", "total", "▧"],
+      ["الفواتير المدفوعة", "paid", "●"],
+      ["إيراد الشهر", "revenueThisMonth", "﷼", { money: true }]
+    ],
+    support: [
+      ["إجمالي التذاكر", "total", "☏"],
+      ["المفتوحة", "open", "●"]
+    ],
+    security: [
+      ["إجمالي التنبيهات", "total", "◈"],
+      ["المفتوحة", "open", "●"],
+      ["الحرجة", "critical", "⚠"]
+    ],
+    analytics: [
+      ["إجمالي المستخدمين", "users.total", "👤"],
+      ["إجمالي الاجتماعات", "meetings.total", "▣"],
+      ["إيراد الشهر", "billing.revenueThisMonth", "﷼", { money: true }]
+    ],
+    settings: [
+      ["الإعدادات المحفوظة", "total", "⚙"]
+    ],
+    "help-center": [
+      ["حالة النظام", "status", "●"],
+      ["قاعدة البيانات", "database", "▣"]
+    ]
+  };
+
+  return cards[key] || cards.overview;
+}
+
+function vxValueFromPath(source, path) {
+  return path.split(".").reduce((value, part) => value && value[part], source);
+}
+
+function adminMetric(title, path, icon, options = {}) {
+  return `<article class="admin-stat"><span class="admin-icon">${icon}</span><div><p>${title}</p><strong data-admin-metric="${path}" data-money="${options.money ? "true" : "false"}" data-percent="${options.percent ? "true" : "false"}">0</strong><small data-admin-note="${path}">بيانات حقيقية من PostgreSQL</small></div></article>`;
+}
+
+function adminApiBanner() {
+  if (vxApiReady()) {
+    return `<div class="vx-api-banner vx-api-loading" data-api-status>جاري قراءة البيانات الحقيقية من PostgreSQL...</div>`;
+  }
+  if (VX_ENABLE_DEMO_DATA) {
+    return `<div class="vx-api-banner vx-api-demo" data-api-status>وضع demo مفعل. لا تستخدمه في الإنتاج.</div>`;
+  }
+  return `<div class="vx-api-banner vx-api-warning" data-api-status>لم يتم ضبط رابط الباكند. ضع رابط Render في config.js أو localStorage باسم VEXWYN_API_URL.</div>`;
+}
+
+function adminGenericPage(key = "overview") {
+  const page = vxPages[key] || vxPages.overview;
+  const [title, subtitle, icon, stats, primary] = page;
+  const metricCards = VX_ENABLE_DEMO_DATA
+    ? stats.map(([a, b, c, d]) => adminStat(a, b, c, d)).join("")
+    : vxMetricCards(key).map(([titleText, metricPath, metricIcon, options]) => adminMetric(titleText, metricPath, metricIcon, options)).join("");
+
+  return adminShell(key, `<div class="admin-actions"><button class="admin-primary" data-admin-modal="${primary}">＋ ${primary}</button><button class="admin-outline" data-admin-modal="تصدير">تصدير ⇩</button><button class="admin-outline" data-admin-modal="تصفية">تصفية ⌕</button></div>${adminApiBanner()}<section class="admin-hero vx-admin-hero"><div><h1>${title}</h1><p>${subtitle}</p></div><div class="admin-hero-art"><span>${icon}</span></div></section><section class="admin-kpis">${metricCards}</section><section class="vx-admin-layout"><div>${vxAdminTable(key)}<div class="admin-panel"><h2>نشاط المنصة</h2>${VX_ENABLE_DEMO_DATA ? vxMiniChart() : '<p class="vx-empty-state">لا توجد بيانات كافية حتى الآن.</p>'}</div></div>${vxAdminSidePanel(key)}</section><section class="admin-feature-row"><article>أمان على مستوى المؤسسات<span>تشفير متقدم وسجل تدقيق شامل.</span></article><article>التحكم في الأدوار والصلاحيات<span>إدارة دقيقة للمستخدمين والفرق.</span></article><article>سجلات التدقيق والمراجعة<span>تتبع كامل لكل الأنشطة والتغييرات.</span></article></section>`);
+}
+
+function adminLogin() {
+  const apiHint = vxApiReady()
+    ? "سيتم تسجيل الدخول عبر الباكند المنشور على Render."
+    : "رابط الباكند غير مضبوط بعد. ضع Render URL في config.js.";
+
+  return `<main class="admin-login vx-admin-login" dir="rtl"><header>${adminLogo()}<nav><a href="#/">العودة إلى الموقع ←</a><span>العربية ◌</span><span>مركز المساعدة ؟</span></nav></header><section><aside class="admin-login-showcase"><div class="admin-shield">▣</div><h1><span>Vexwyn</span> بوابة إدارة</h1><h2>تسجيل دخول المسؤولين</h2><p>وصول آمن لإدارة المنصة وقراءة البيانات الحقيقية من PostgreSQL عبر Render.</p><div class="admin-login-mini">${adminStat("مصدر البيانات","PostgreSQL","▥","بدون بيانات وهمية")}${adminStat("حالة API", vxApiReady() ? "متصل" : "غير مضبوط","▣", apiHint)}${adminStat("وضع Demo", VX_ENABLE_DEMO_DATA ? "مفعل" : "مغلق","◈","الإنتاج يتطلب false")}</div></aside><form class="admin-login-card" id="admin-login-form"><h1>تسجيل الدخول إلى لوحة الإدارة</h1><p>${apiHint}</p><label>البريد الإداري<input name="email" type="email" placeholder="admin@vexwyn.com" required></label><label>كلمة المرور<input name="password" type="password" placeholder="أدخل كلمة المرور" required></label><button class="admin-primary" type="submit">دخول آمن 🔒</button><div class="admin-divider">أو</div><button class="admin-outline" type="button" data-admin-modal="SSO يحتاج تفعيل مزود الهوية في الباكند">تسجيل الدخول عبر SSO ◈</button></form></section><footer>جميع الحقوق محفوظة © 2025 Vexwyn</footer><div id="admin-modal-root"></div></main>`;
+}
+
+async function hydrateAdminPage(key) {
+  const banner = document.querySelector("[data-api-status]");
+  if (!vxApiReady() || VX_ENABLE_DEMO_DATA) return;
+
+  try {
+    const endpoint = key === "overview"
+      ? "/api/admin/overview"
+      : `/api/admin/${key === "help-center" ? "overview" : key}/stats`;
+    const data = await vxApiFetch(endpoint);
+
+    document.querySelectorAll("[data-admin-metric]").forEach((node) => {
+      const path = node.dataset.adminMetric;
+      const value = vxValueFromPath(data, path);
+      node.textContent = vxFormatMetric(value, {
+        money: node.dataset.money === "true",
+        percent: node.dataset.percent === "true"
+      });
+    });
+
+    document.querySelectorAll("[data-admin-note]").forEach((node) => {
+      node.textContent = data.empty ? "لا توجد بيانات كافية حتى الآن" : "محدث من قاعدة البيانات";
+    });
+
+    if (banner) {
+      banner.className = "vx-api-banner vx-api-ok";
+      banner.textContent = "تم تحميل البيانات الحقيقية من PostgreSQL.";
+    }
+  } catch (error) {
+    if (banner) {
+      banner.className = "vx-api-banner vx-api-error";
+      banner.textContent = `تعذر قراءة بيانات PostgreSQL: ${error.message}`;
+    }
+  }
+}
+
+function bindAdmin() {
+  document.querySelectorAll("[data-admin-link]").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const href = link.getAttribute("href");
+      if (!href || !(href.startsWith(VX_ADMIN_BASE) || href.startsWith("/admin"))) return;
+      event.preventDefault();
+      history.pushState(null, "", href.replace("/admin", VX_ADMIN_BASE));
+      route();
+    });
+  });
+
+  const form = document.getElementById("admin-login-form");
+  if (form) {
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const email = data.get("email");
+      const password = data.get("password");
+
+      try {
+        if (vxApiReady()) {
+          const result = await vxApiFetch("/api/admin/auth/login", {
+            method: "POST",
+            body: JSON.stringify({ email, password })
+          });
+          localStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify({
+            role: result.user.role,
+            name: result.user.name,
+            createdAt: new Date().toISOString()
+          }));
+        } else if (VX_ENABLE_DEMO_DATA && email === VX_ADMIN_EMAIL && password === VX_ADMIN_PASSWORD) {
+          localStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify({ role: "admin", name: "Demo Admin", createdAt: new Date().toISOString() }));
+        } else {
+          showAdminModal("رابط الباكند غير مضبوط. أضف Render URL في config.js قبل تسجيل الدخول.");
+          return;
+        }
+
+        history.pushState(null, "", VX_ADMIN_BASE);
+        route();
+      } catch (error) {
+        showAdminModal(`تعذر تسجيل الدخول: ${error.message}`);
+      }
+    });
+  }
+
+  document.querySelectorAll("[data-admin-modal]").forEach((button) => {
+    button.addEventListener("click", () => showAdminModal(button.dataset.adminModal));
+  });
+}
+
 function route() {
   const directAdminPath = adminPath();
   if (directAdminPath) {
     const app = document.getElementById("app");
     app.innerHTML = renderAdminRoute(directAdminPath);
     bindAdmin();
+    const normalized = directAdminPath.replace("/admin", VX_ADMIN_BASE).replace(/\/$/, "");
+    const key = normalized === VX_ADMIN_BASE ? "overview" : normalized.replace(`${VX_ADMIN_BASE}/`, "");
+    if (isAdminSignedIn()) hydrateAdminPage(key);
     return;
   }
   const hash = location.hash.replace("#", "") || "/";

@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: vexwyn-backend
+    env: node
+    plan: starter
+    region: frankfurt
+    rootDir: backend
+    buildCommand: npm install && npx prisma generate
+    startCommand: npx prisma migrate deploy && npm run start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ENABLE_DEMO_DATA
+        value: "false"
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_JWT_SECRET
+        generateValue: true
+      - key: FRONTEND_URL
+        value: https://agtmat.vercel.app
+      - key: ADMIN_URL
+        value: https://agtmat.vercel.app
+      - key: CORS_ORIGINS
+        value: https://agtmat.vercel.app
