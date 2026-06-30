@@ -1,0 +1,30 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/advanced-pro-control", "destination": "/advanced-pro-control/index.html" },
+    { "source": "/advanced-pro-control/login", "destination": "/advanced-pro-control/login/index.html" },
+    { "source": "/advanced-pro-control/users", "destination": "/advanced-pro-control/users/index.html" },
+    { "source": "/advanced-pro-control/meetings", "destination": "/advanced-pro-control/meetings/index.html" },
+    { "source": "/advanced-pro-control/teams", "destination": "/advanced-pro-control/teams/index.html" },
+    { "source": "/advanced-pro-control/subscriptions", "destination": "/advanced-pro-control/subscriptions/index.html" },
+    { "source": "/advanced-pro-control/invoices", "destination": "/advanced-pro-control/invoices/index.html" },
+    { "source": "/advanced-pro-control/support", "destination": "/advanced-pro-control/support/index.html" },
+    { "source": "/advanced-pro-control/security", "destination": "/advanced-pro-control/security/index.html" },
+    { "source": "/advanced-pro-control/analytics", "destination": "/advanced-pro-control/analytics/index.html" },
+    { "source": "/advanced-pro-control/settings", "destination": "/advanced-pro-control/settings/index.html" },
+    { "source": "/advanced-pro-control/help-center", "destination": "/advanced-pro-control/help-center/index.html" },
+    { "source": "/admin", "destination": "/advanced-pro-control/index.html" },
+    { "source": "/admin/login", "destination": "/advanced-pro-control/login/index.html" },
+    { "source": "/admin/users", "destination": "/advanced-pro-control/users/index.html" },
+    { "source": "/admin/meetings", "destination": "/advanced-pro-control/meetings/index.html" },
+    { "source": "/admin/teams", "destination": "/advanced-pro-control/teams/index.html" },
+    { "source": "/admin/subscriptions", "destination": "/advanced-pro-control/subscriptions/index.html" },
+    { "source": "/admin/invoices", "destination": "/advanced-pro-control/invoices/index.html" },
+    { "source": "/admin/support", "destination": "/advanced-pro-control/support/index.html" },
+    { "source": "/admin/security", "destination": "/advanced-pro-control/security/index.html" },
+    { "source": "/admin/analytics", "destination": "/advanced-pro-control/analytics/index.html" },
+    { "source": "/admin/settings", "destination": "/advanced-pro-control/settings/index.html" },
+    { "source": "/admin/help-center", "destination": "/advanced-pro-control/help-center/index.html" }
+  ]
+}
