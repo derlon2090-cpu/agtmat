@@ -184,7 +184,7 @@ function landingPreview() {
   return `
     <section class="dashboard-preview">
       <aside class="panel"><h3>كل ما تحتاجه في مكان واحد</h3><div class="feature-list">${["جدولة عالية","مشاركة الملفات","دردشة تفاعلية","اجتماعات مسجلة"].map(x=>`<div><span>${x}</span><b>✎</b></div>`).join("")}</div></aside>
-      <section class="panel"><h3>لوحة التحكم ▦</h3><div class="stats-grid">${["الاجتماعات اليوم|6","إجمالي المشاركين|128","ساعات الاجتماعات|24.5","مستوى المشاركة|85%"].map((s,i)=>{const [a,b]=s.split("|");return `<div class="stat-box"><span>${a}</span><b>${b}</b>${i<3?`<div class="spark"></div>`:`<div class="ring"></div>`}</div>`}).join("")}</div></section>
+      <section class="panel"><h3>لوحة التحكم ▦</h3><div class="stats-grid">${["الاجتماعات اليوم|0","إجمالي المشاركين|0","ساعات الاجتماعات|0","مستوى المشاركة|0%"].map((s,i)=>{const [a,b]=s.split("|");return `<div class="stat-box"><span>${a}</span><b>${b}</b>${i<3?`<div class="spark"></div>`:`<div class="ring"></div>`}</div>`}).join("")}</div></section>
       <aside class="panel"><h3>تكاملات ذكية ⚙</h3><div class="integrations">${["Google Calendar","Microsoft 365","Slack","Zoom","Drive","المزيد"].map(x=>`<div class="integration"><span class="logo-dot"></span><b>${x}</b></div>`).join("")}</div></aside>
     </section>
     <section class="benefit-strip">
@@ -224,7 +224,7 @@ function dashboard() {
       <aside class="panel"><h3>إجراءات سريعة</h3><div class="quick-grid">${["اجتماع جديد","انضم لاجتماع","جدولة اجتماع","مشاركة الشاشة"].map(x=>`<button class="quick-action">${x}<span class="icon-box">${icons.video}</span></button>`).join("")}</div></aside>
       <div>
         <article class="panel next-meeting"><div class="calendar-art">▦</div><div><span class="pill">الاجتماع القادم</span><h2>مراجعة خطة المشروع</h2><p>اليوم، 28 مايو 2024 · 10:00 - 11:00 ص · 9 مشاركين</p><a class="primary-btn" href="#/app/meetings/room">انضم الآن ${icons.video}</a></div></article>
-        <div class="cards-4">${["اجتماعات اليوم|6","إجمالي الساعات|48.5","المشاركون النشطون|128","معدل الحضور|92%"].map(card).join("")}</div>
+        <div class="cards-4">${["اجتماعات اليوم|0","إجمالي الساعات|0","المشاركون النشطون|0","معدل الحضور|0%"].map(card).join("")}</div>
       </div>
     </section>
     <section class="content-grid">
@@ -280,7 +280,7 @@ function filters() {
 }
 
 function leftAside() {
-  return `${miniPanel("جدول اليوم", ["10:00 مراجعة خطة المشروع","12:00 جلسة تخطيط الربع القادم","15:00 مناقشة التصميم النهائي"])}<br>${miniPanel("إحصائيات", ["12 اجتماعات هذا الأسبوع","18.4 إجمالي ساعات الاجتماعات","92% متوسط الحضور"])}`;
+  return `${miniPanel("جدول اليوم", ["لا توجد اجتماعات اليوم","اربط التقويم لعرض المواعيد","ابدأ بجدولة اجتماع جديد"])}<br>${miniPanel("إحصائيات", ["0 اجتماعات هذا الأسبوع","0 إجمالي ساعات الاجتماعات","0% متوسط الحضور"])}`;
 }
 
 function upgradePanel() {
@@ -302,7 +302,7 @@ function teams() {
 
 function files() {
   const rows = [["عرض_المشروع_v3.pptx","عرض تقديمي","2.4 MB","مشترك"],["خطة_الربع_القادم.xlsx","جدول بيانات","1.8 MB","خاص"],["ملخص_الاجتماع_الأخير.docx","مستند","856 KB","مشترك"],["تصميم_الواجهة_النهائية.fig","تصميم","8.1 MB","مفتوح"],["تسجيل_مراجعة_الخطة.mp4","فيديو","245 MB","تسجيل"]];
-  return shell("files", listPage("الملفات", "إدارة ملفات فريقك وتنظيم المجلدات والوصول السريع إلى المستندات", ["رفع ملف", "مجلد جديد"], `<div class="folders-grid">${["فريق المشروع","التصميم","التسويق","العقود","العروض","التسجيلات"].map(f=>`<article class="folder-card"><span class="icon-box">${icons.folder}</span><h3>${f}</h3><p>${Math.floor(Math.random()*30)+9} ملف</p>${avatars(4)}</article>`).join("")}</div><div class="file-table">${rows.map(r=>`<div class="file-row"><b>${r[0]}</b><span>${r[1]}</span><span>${r[2]}</span><span>منذ 15 دقيقة</span><span class="status ${r[3]==="خاص"?"upcoming":"live"}">${r[3]}</span></div>`).join("")}</div>`));
+  return shell("files", listPage("الملفات", "إدارة ملفات فريقك وتنظيم المجلدات والوصول السريع إلى المستندات", ["رفع ملف", "مجلد جديد"], `<div class="folders-grid">${["فريق المشروع","التصميم","التسويق","العقود","العروض","التسجيلات"].map(f=>`<article class="folder-card"><span class="icon-box">${icons.folder}</span><h3>${f}</h3><p>0 ملف</p>${avatars(0)}</article>`).join("")}</div><div class="file-table">${rows.map(r=>`<div class="file-row"><b>${r[0]}</b><span>${r[1]}</span><span>${r[2]}</span><span>منذ 15 دقيقة</span><span class="status ${r[3]==="خاص"?"upcoming":"live"}">${r[3]}</span></div>`).join("")}</div>`));
 }
 
 function settings() {
@@ -498,6 +498,396 @@ function bindAdmin() {
   });
 }
 
+const VX_APP_ZERO_NOTE = "مرتبط بالبيانات الحقيقية";
+
+function userProfile() {
+  try {
+    const saved = JSON.parse(localStorage.getItem("vexwyn-user-session") || "{}");
+    return {
+      name: saved.name || "أحمد خالد",
+      email: saved.email || "ahmad@vexwyn.com",
+      team: saved.team || "فريق المشروع"
+    };
+  } catch {
+    return { name: "أحمد خالد", email: "ahmad@vexwyn.com", team: "فريق المشروع" };
+  }
+}
+
+function appNav(active) {
+  const nav = [
+    ["dashboard", "الرئيسية", icons.home, "#/app"],
+    ["meetings", "الاجتماعات", icons.video, "#/app/meetings"],
+    ["calendar", "التقويم", icons.calendar, "#/app/calendar"],
+    ["messages", "الرسائل", icons.chat, "#/app/messages"],
+    ["teams", "الفرق", icons.teams, "#/app/teams"],
+    ["files", "الملفات", icons.files, "#/app/files"],
+    ["settings", "الإعدادات", icons.settings, "#/app/settings"]
+  ];
+  return nav.map(([key, label, icon, href]) =>
+    `<a class="side-link ${active === key ? "active" : ""}" href="${href}"><span>${label}</span><b>${icon}</b></a>`
+  ).join("");
+}
+
+function shell(active, content) {
+  const profile = userProfile();
+  return `<div class="app-shell ux-shell">
+    <aside class="sidebar ux-sidebar">
+      ${brand()}
+      <a class="user-card" href="#/app/profile"><span>⌄</span><div><b>${profile.name}</b><p>مدير المشروع</p><small>● متصل</small></div><span class="avatar">${profile.name[0] || "أ"}</span></a>
+      <nav class="nav-stack">${appNav(active)}</nav>
+      <div class="upgrade-card"><h3>ترقية الخطة</h3><p>احصل على مزايا متقدمة وإمكانات أكبر بلا حدود.</p><a class="primary-btn" href="#/app/billing">ترقية الآن ✦</a></div>
+    </aside>
+    <main>
+      <div class="topbar ux-topbar"><span>${icons.bell}<sup>0</sup></span><a href="#/app/settings">${icons.settings}</a><input class="search" placeholder="ابحث في الاجتماعات، الرسائل، الفرق..."></div>
+      <div class="app-content ux-content">${content}</div>
+    </main>
+    <div id="app-modal-root"></div><div id="app-toast-root"></div>
+  </div>`;
+}
+
+function appAction(label, action, primary = false) {
+  return `<button class="${primary ? "primary-btn" : "outline-btn"}" type="button" data-app-action="${action}">${label}</button>`;
+}
+
+function userMetric(title, icon, key = "") {
+  return `<article class="panel ux-stat"><div class="row-between"><span>${title}</span><span class="icon-box">${icon}</span></div><h2 data-user-metric="${key}">0</h2><small>${VX_APP_ZERO_NOTE}</small><div class="spark is-zero"></div></article>`;
+}
+
+function appHeader(title, subtitle, icon, actions = "") {
+  return `<div class="page-title ux-page-title"><div><h1>${title} <span>${icon}</span></h1><p>${subtitle}</p></div><div class="row-between">${actions}</div></div>`;
+}
+
+function emptyState(title, text) {
+  return `<div class="ux-empty"><b>${title}</b><p>${text}</p></div>`;
+}
+
+function dashboard() {
+  return shell("dashboard", `
+    ${appHeader("مرحبا بعودتك، " + userProfile().name.split(" ")[0], "إدارة اجتماعاتك وفرقك بسهولة وكفاءة.", "", "")}
+    <section class="grid-dashboard ux-dashboard-grid">
+      <aside class="panel ux-quick"><h3>إجراءات سريعة</h3><div class="quick-grid">
+        <button class="quick-action" type="button" data-app-action="new-meeting"><span class="icon-box">${icons.video}</span><b>اجتماع جديد</b></button>
+        <button class="quick-action" type="button" data-app-action="join-meeting"><span class="icon-box">↪</span><b>انضم لاجتماع</b></button>
+        <button class="quick-action" type="button" data-app-action="schedule-meeting"><span class="icon-box">${icons.calendar}</span><b>جدولة اجتماع</b></button>
+        <button class="quick-action" type="button" data-app-action="screen-share"><span class="icon-box">▭</span><b>مشاركة الشاشة</b></button>
+      </div></aside>
+      <article class="panel next-meeting ux-next"><div class="calendar-art">▦</div><div><span class="pill">الاجتماع القادم</span><h2>لا توجد اجتماعات مجدولة</h2><p>عند إنشاء اجتماع أو ربط البيانات الحقيقية سيظهر هنا مباشرة.</p><div class="row-between">${appAction("جدولة اجتماع", "schedule-meeting", true)}${appAction("عرض الاجتماعات", "open-meetings")}</div></div></article>
+    </section>
+    <section class="cards-4 ux-dashboard-stats">${[
+      ["اجتماعات اليوم", icons.calendar, "meetings.today"],
+      ["إجمالي الساعات", "◷", "meetings.hours"],
+      ["المشاركون النشطون", icons.teams, "members.active"],
+      ["معدل الحضور", "◎", "attendance.rate"]
+    ].map(([a,b,c]) => userMetric(a,b,c)).join("")}</section>
+    <section class="content-grid">
+      ${miniPanel("آخر التحديثات", ["لا توجد تحديثات بعد", "اربط البيانات الحقيقية لعرض النشاط", "سجل الاجتماعات سيظهر هنا"])}
+      ${miniPanel("المهام", ["لا توجد مهام نشطة", "أنشئ مهمة بعد أول اجتماع", "سيتم حفظ المهام هنا"], true)}
+      ${miniPanel("جدول اليوم", ["لا توجد أحداث اليوم", "استخدم جدولة اجتماع لإضافة حدث", "كل الأحداث القادمة ستظهر هنا"])}
+    </section>
+  `);
+}
+
+function card(s) {
+  const [title, num] = s.split("|");
+  return `<article class="panel ux-stat"><div class="row-between"><span>${title}</span><span class="icon-box">${icons.calendar}</span></div><h2>${num || "0"}</h2><small>${VX_APP_ZERO_NOTE}</small><div class="spark is-zero"></div></article>`;
+}
+
+function miniPanel(title, rows, checks = false) {
+  return `<article class="panel ux-mini"><div class="row-between"><h3>${title}</h3><button class="auth-link gradient-text" type="button" data-app-action="view-all">عرض الكل</button></div><div class="list">${rows.map((row, index) => `<div class="list-item"><span>${row}</span><span>${checks ? `<input type="checkbox" ${index === 0 ? "checked" : ""}>` : "0"}</span></div>`).join("")}</div></article>`;
+}
+
+function leftAside() {
+  return `${miniPanel("جدول اليوم", ["لا توجد اجتماعات اليوم", "لا توجد مهام مجدولة", "لا توجد تسجيلات جديدة"])}<br>${miniPanel("إحصائيات", ["اجتماعات هذا الأسبوع", "إجمالي ساعات الاجتماعات", "متوسط الحضور"])}`;
+}
+
+function upgradePanel() {
+  return `<article class="panel ux-upgrade"><h3>ترقية الخطة</h3><p>احصل على جلسات غير محدودة وتحليلات أكثر احترافية.</p><div class="mega-art"></div><a class="primary-btn" href="#/app/billing">ترقية الآن ✦</a></article>`;
+}
+
+function filters() {
+  return `<div class="row-between ux-filters"><input class="search" placeholder="ابحث هنا..."><button class="outline-btn active" type="button" data-app-action="filter-all">الكل</button><button class="outline-btn" type="button" data-app-action="filter-upcoming">القادمة</button><button class="outline-btn" type="button" data-app-action="filter-ended">المنتهية</button></div>`;
+}
+
+function listPage(title, subtitle, actions, body, active = "") {
+  const buttons = actions.map(([label, action, primary]) => appAction(label, action, primary)).join("");
+  return `${appHeader(title, subtitle, active, buttons)}<div class="two-aside ux-three-col"><aside>${leftAside()}</aside><section class="panel">${filters()}${body}</section><aside>${upgradePanel()}</aside></div>`;
+}
+
+function meetingRows() {
+  const rows = [
+    ["مراجعة خطة المشروع", "جاهز للجدولة", "0 مشارك", "غير محدد", "join-meeting"],
+    ["جلسة تخطيط الربع القادم", "قادم", "0 مشارك", "غير محدد", "open-meeting"],
+    ["مناقشة التصميم النهائي", "قادم", "0 مشارك", "غير محدد", "open-meeting"],
+    ["اجتماع متابعة الأداء", "منتهي", "0 مشارك", "لا يوجد تسجيل", "open-recording"]
+  ];
+  return `<div class="data-list">${rows.map(([title, state, people, time, action]) => `<article class="meeting-row ux-row"><div><button class="primary-btn" type="button" data-app-action="${action}">${action === "join-meeting" ? "انضم الآن" : "فتح"}</button><button class="mini-btn" type="button" data-app-action="details">التفاصيل</button></div><div><h2>${title}</h2><p>سيتم عرض تفاصيل الاجتماع من البيانات الحقيقية عند توفرها.</p>${avatars(0)}</div><div><span class="status ${state === "قادم" ? "upcoming" : state === "منتهي" ? "ended" : "live"}">${state}</span><p>${time}</p><p>${people}</p></div></article>`).join("")}</div>`;
+}
+
+function meetings() {
+  return shell("meetings", listPage("الاجتماعات", "إدارة جميع اجتماعاتك المباشرة والقادمة والمنتهية بسهولة", [["اجتماع جديد", "new-meeting", true], ["جدولة اجتماع", "schedule-meeting", false]], meetingRows(), icons.video));
+}
+
+function calendar() {
+  const days = Array.from({ length: 35 }, (_, index) => index + 1);
+  return shell("calendar", `${appHeader("التقويم", "إدارة الاجتماعات والمواعيد وتوفر الفريق في مكان واحد", icons.calendar, `${appAction("جدولة اجتماع", "schedule-meeting", true)}${appAction("إضافة حدث", "add-event")}`)}
+    <div class="two-aside ux-three-col"><aside>${leftAside()}</aside><section class="panel ux-calendar-panel"><div class="row-between"><button class="outline-btn" type="button" data-app-action="calendar-today">اليوم</button><h2>مايو 2024</h2><button class="outline-btn" type="button" data-app-action="calendar-next">‹ ›</button></div><div class="calendar-view">${days.map((day) => `<button class="day" type="button" data-app-action="calendar-day"><b>${day}</b>${day === 28 ? `<div class="event">لا توجد بيانات مرتبطة<br>0 اجتماع</div>` : ""}</button>`).join("")}</div></section><aside>${upgradePanel()}</aside></div>`);
+}
+
+function messages() {
+  return shell("messages", `${appHeader("الرسائل", "تواصل مع فريقك وناقش الملفات والاجتماعات في مكان واحد", icons.chat, appAction("رسالة جديدة", "new-message", true))}
+    <div class="channels ux-messages"><aside class="panel">${["فريق المشروع","التصميم","الدعم الداخلي","الاجتماع الأسبوعي"].map((name, index) => `<button class="channel" type="button" data-app-action="open-channel"><span class="icon-box">${index ? icons.chat : icons.teams}</span><div><h3>${name}</h3><p>لا توجد رسائل غير مقروءة</p></div><b>0</b></button>`).join("")}</aside><section class="panel chat-large"><div class="row-between"><h2>فريق المشروع</h2><div>${appAction("بدء اجتماع", "join-meeting")}${appAction("مكالمة صوتية", "audio-call")}</div></div><div class="messages">${emptyState("لا توجد رسائل بعد", "ابدأ محادثة أو اربط قاعدة البيانات لعرض المحادثات الحقيقية.")}</div><form class="chat-input" data-chat-form><input name="message" placeholder="اكتب رسالة..."><button class="primary-btn" type="submit">➤</button></form></section></div>`);
+}
+
+function teams() {
+  const teamsList = ["فريق المشروع", "التصميم", "التسويق", "الدعم الداخلي", "المنتج", "الإدارة"];
+  return shell("teams", `${appHeader("الفرق", "أنشئ فرقك، نظم الأعضاء، وتابع التعاون في مكان واحد", icons.teams, `${appAction("إنشاء فريق جديد", "new-team", true)}${appAction("دعوة عضو", "invite-member")}`)}
+    <div class="two-aside ux-three-col"><aside>${miniPanel("الفرق النشطة", ["0 فرق نشطة","0 عضو متصل الآن","لا توجد أنشطة"])}</aside><section><div class="teams-grid">${teamsList.map((team) => `<article class="team-card ux-team"><div class="row-between"><h2>${team}</h2><span class="icon-box">${icons.teams}</span></div><p>تظهر بيانات الفريق الحقيقية بعد ربط حسابك بقاعدة البيانات.</p>${avatars(0)}<div class="row-between" style="margin-top:18px"><button class="outline-btn" type="button" data-app-action="manage-team">إدارة</button><button class="primary-btn" type="button" data-app-action="open-team">فتح</button></div></article>`).join("")}</div></section><aside>${upgradePanel()}</aside></div>`);
+}
+
+function files() {
+  const folders = ["فريق المشروع", "التصميم", "التسويق", "العقود", "العروض", "التسجيلات"];
+  return shell("files", listPage("الملفات", "إدارة ملفات فريقك وتنظيم المجلدات والوصول السريع إلى المستندات", [["رفع ملف", "upload-file", true], ["مجلد جديد", "new-folder", false]], `<div class="folders-grid">${folders.map((folder) => `<button class="folder-card" type="button" data-app-action="open-folder"><span class="icon-box">${icons.folder}</span><h3>${folder}</h3><p>0 ملف</p>${avatars(0)}</button>`).join("")}</div><div class="file-table">${emptyState("لا توجد ملفات", "ارفع ملفًا أو اربط التخزين الحقيقي لعرض المستندات.")}</div>`, icons.files));
+}
+
+function settings() {
+  const profile = userProfile();
+  const toggles = ["الوضع الليلي", "إظهار المعاينات المباشرة", "تثبيت الشريط الجانبي", "الاختصارات الذكية"];
+  return shell("settings", `${appHeader("الإعدادات", "خصص حسابك، إعدادات الاجتماعات، الأمان، والتنبيهات من مكان واحد", icons.settings, `${appAction("حفظ التغييرات", "save-settings", true)}${appAction("إعادة تعيين", "reset-settings")}`)}
+    <section class="settings-grid ux-settings"><article class="panel"><h3>إعدادات الحساب</h3>${[["الاسم الكامل", profile.name], ["البريد الإلكتروني", profile.email], ["الفريق", profile.team], ["اللغة", "العربية"], ["المنطقة الزمنية", "Asia/Riyadh"]].map(([label, value]) => `<div class="field"><label>${label}</label><input value="${value}"></div>`).join("")}</article><article class="panel"><h3>تفضيلات الواجهة</h3>${toggles.map((item, index) => `<button class="toggle-row" type="button" data-toggle><span>${item}</span><span class="toggle ${index === 1 || index === 2 ? "on" : ""}"></span></button>`).join("")}</article><article class="panel"><h3>الملف الشخصي</h3><div style="text-align:center"><span class="avatar" style="width:90px;height:90px;font-size:34px">${profile.name[0] || "أ"}</span><h2>${profile.name}</h2><p>مدير المشروع</p><button class="outline-btn" type="button" data-app-action="edit-profile">تعديل الملف</button></div></article><article class="panel"><h3>الإشعارات</h3>${["رسائل جديدة","تذكيرات الاجتماعات","دعوات الفريق","تعليقات على الملفات"].map((item, index) => `<button class="toggle-row" type="button" data-toggle><span>${item}</span><span class="toggle ${index !== 3 ? "on" : ""}"></span></button>`).join("")}</article><article class="panel"><h3>الخصوصية والأمان</h3><div class="ux-privacy">${["تغيير كلمة المرور","إدارة الجلسات النشطة","تنزيل بياناتك","إعدادات متقدمة"].map((item) => `<button class="outline-btn" type="button" data-app-action="settings-tool">${item}</button>`).join("")}</div></article><article class="panel"><h3>حفظ التغييرات</h3><p>لا توجد تغييرات غير محفوظة</p><button class="primary-btn" style="width:100%" type="button" data-app-action="save-settings">حفظ التغييرات</button><br><br><button class="outline-btn" style="width:100%" type="button" data-app-action="reset-settings">إعادة تعيين</button></article></section>`);
+}
+
+function billing() {
+  const content = `<div class="pricing-page ux-billing"><section class="pricing-hero"><h1>ترقية الباقة</h1><p>اختر الخطة المناسبة لفريقك وفعل مزايا أكثر احترافية.</p><div class="billing-toggle"><span>شهري</span><span class="on">سنوي <small>وفر 20%</small></span></div></section><section class="cards-4">${[["الخطة الحالية", "Pro"], ["المشاركون في الفريق", "0"], ["التخزين السحابي", "0%"], ["اجتماعات هذا الشهر", "0"]].map(([a,b]) => `<article class="panel ux-stat"><span>${a}</span><h2>${b}</h2><small>${VX_APP_ZERO_NOTE}</small></article>`).join("")}</section><section class="pricing-grid">${plans.map(([name, price, desc, features, pop]) => `<article class="plan-card ${pop ? "featured" : ""}"><div class="row-between"><h2>${name}</h2><span class="icon-box">${pop ? icons.crown : "ϟ"}</span></div><p>${desc}</p><div><span class="price">${price}</span> ريال / شهريا</div><div class="check-list">${features.map((feature) => `<span>✓ ${feature}</span>`).join("")}</div><button class="${pop ? "primary-btn" : "outline-btn"}" style="width:100%" type="button" data-app-action="select-plan">${pop ? "الخطة الحالية" : "اختر " + name}</button></article>`).join("")}</section><section class="comparison">${["الميزة|Starter|Pro|Business","المشاركون لكل اجتماع|10|50|200","التسجيل السحابي|5 جيجابايت|20 جيجابايت|غير محدود","الترجمة المباشرة|أساسية|متقدمة|احترافية","Vexwyn AI|أساسي|متقدم|شامل","الدعم|بريد إلكتروني|دردشة + بريد أولوية|24/7 أولوية"].map((row) => `<div class="comparison-row">${row.split("|").map((cell) => `<div>${cell}</div>`).join("")}</div>`).join("")}</section></div>`;
+  return shell("settings", content);
+}
+
+function helpCenter() {
+  return shell("dashboard", `${appHeader("مركز المساعدة", "كل الأدلة والمعلومات التي تحتاجها لإدارة Vexwyn بكفاءة.", "?", appAction("إنشاء تذكرة", "new-ticket", true))}
+    <section class="cards-4">${[["حالة النظام", "0"], ["الأدلة المحدثة", "0"], ["نسبة حل المشاكل", "0"], ["التذاكر المفتوحة", "0"]].map(([a,b]) => `<article class="panel ux-stat"><span>${a}</span><h2>${b}</h2><small>${VX_APP_ZERO_NOTE}</small></article>`).join("")}</section><section class="content-grid">${["قاعدة المعرفة","التذاكر والدعم","الفيديوهات التعليمية"].map((title) => `<article class="panel ux-mini"><h3>${title}</h3><p>سيتم عرض البيانات الحقيقية بعد الربط.</p><button class="outline-btn" type="button" data-app-action="view-all">استعراض</button></article>`).join("")}</section>`);
+}
+
+function contactPage() {
+  return `<div class="vx-page-bg"></div>${publicHeader("contact")}<main class="vx-contact-page"><section class="mega show vx-contact-static"><aside class="mega-card"><h2 class="gradient-text">تواصل مع فريق Vexwyn ✦</h2><p>نحن هنا للإجابة على أسئلتك ومساعدتك في اختيار الخطة المناسبة.</p><button class="primary-btn" type="button" data-app-action="send-contact">أرسل رسالة</button><button class="outline-btn" type="button" data-app-action="book-call">احجز مكالمة</button></aside><div class="mega-list">${contactItems.map(([title, desc, icon]) => `<button class="mega-item" type="button" data-app-action="contact-card"><span class="icon-box">${icon}</span><div><h4>${title}</h4><p>${desc}</p></div><b>‹</b></button>`).join("")}</div></section><div id="app-modal-root"></div><div id="app-toast-root"></div></main>`;
+}
+
+function meetingRoom() {
+  return `<main class="meeting-room ux-meeting-room">
+    <header class="meeting-header">${brand()}<div class="row-between"><b>${icons.shield} مراجعة خطة المشروع</b><span class="status live">● مباشر الآن</span><span class="status ended">● تسجيل جار</span><b>00:00:00</b></div><div class="row-between">${appAction("دعوة", "invite-member")}${appAction("مشاركة الشاشة", "screen-share")}${appAction("السبورة الذكية", "whiteboard")}${appAction("⋮", "more")}</div></header>
+    <section class="meeting-layout">
+      <div><div class="room-videos"><div class="person main"><span class="pill" style="margin:18px">المتحدث الرئيسي</span><span class="name">أحمد خالد</span></div><div class="participant-grid">${["سارة محمد","ليلى منصور","عمر خالد","نورا علي","محمد سعيد","+0 أعضاء آخرون"].map((name, index) => `<div class="${index === 5 ? "more-tile" : "person"}"><span class="name">${name}</span></div>`).join("")}</div></div><div class="room-below"><article class="panel"><h3>مساعدة Vexwyn AI ✦</h3><p>لا توجد ملخصات حقيقية بعد. سيظهر الملخص بعد انتهاء الاجتماع وربط البيانات.</p><button class="outline-btn" type="button" data-app-action="meeting-summary">عرض ملخص الاجتماع الكامل</button></article><article class="panel"><h3>الترجمة المباشرة CC</h3><p><b>النظام:</b> الترجمة جاهزة عند بدء الجلسة.</p><hr><h3>الموجودون الآن (0)</h3>${avatars(0)}</article></div></div>
+      <aside class="panel chat-panel"><div class="chat-tabs"><span>الشات</span><span>المشاركون 0</span></div><div class="messages">${emptyState("لا توجد رسائل", "اكتب أول رسالة في الاجتماع.")}</div><form class="chat-input" data-chat-form><input name="message" placeholder="اكتب رسالة..."><button class="primary-btn" type="submit">➤</button></form></aside>
+    </section>
+    <footer class="control-bar">${["الميكروفون","الكاميرا","مشاركة الشاشة","الدردشة","رفع اليد","التفاعلات","التسجيل","المزيد"].map((item) => `<button class="control" type="button" data-app-action="meeting-control"><span class="circle">${icons.video}</span><span>${item}</span></button>`).join("")}<button class="primary-btn" style="background:var(--danger)" type="button" data-app-action="leave-meeting">مغادرة الاجتماع</button></footer>
+    <div id="app-modal-root"></div><div id="app-toast-root"></div>
+  </main>`;
+}
+
+function showAppModal(title, body = "هذا الإجراء جاهز للربط بواجهة API حقيقية. لن يتم إنشاء بيانات وهمية.") {
+  let root = document.getElementById("app-modal-root");
+  if (!root) {
+    root = document.createElement("div");
+    root.id = "app-modal-root";
+    document.body.appendChild(root);
+  }
+  root.innerHTML = `<div class="admin-modal-backdrop"><section class="admin-modal ux-modal"><button class="admin-modal-close" type="button" aria-label="إغلاق">×</button><h2>${title}</h2><p>${body}</p><label>ملاحظة<input placeholder="أدخل تفاصيل الإجراء"></label><div><button class="admin-primary admin-modal-close" type="button">حفظ</button><button class="admin-outline admin-modal-close" type="button">إلغاء</button></div></section></div>`;
+  root.querySelectorAll(".admin-modal-close").forEach((button) => button.addEventListener("click", () => root.innerHTML = ""));
+}
+
+function showAppToast(message) {
+  let root = document.getElementById("app-toast-root");
+  if (!root) {
+    root = document.createElement("div");
+    root.id = "app-toast-root";
+    document.body.appendChild(root);
+  }
+  root.innerHTML = `<div class="app-toast">${message}</div>`;
+  setTimeout(() => {
+    if (root) root.innerHTML = "";
+  }, 2200);
+}
+
+function bindAppInteractions() {
+  document.querySelectorAll('a[href="#"]').forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      showAppModal("إجراء غير مرتبط بعد");
+    });
+  });
+
+  document.querySelectorAll("[data-app-action]").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      const action = button.dataset.appAction;
+      if (button.tagName === "BUTTON") event.preventDefault();
+      if (action === "join-meeting" || action === "screen-share") location.hash = "#/app/meetings/room";
+      else if (action === "open-meetings") location.hash = "#/app/meetings";
+      else if (action === "new-meeting") location.hash = "#/app/meetings";
+      else if (action === "schedule-meeting" || action === "add-event" || action === "calendar-day" || action === "calendar-today" || action === "calendar-next") location.hash = "#/app/calendar";
+      else if (action === "new-message" || action === "open-channel") location.hash = "#/app/messages";
+      else if (action === "new-team" || action === "invite-member" || action === "open-team" || action === "manage-team") showAppModal(button.textContent.trim() || "إدارة الفريق");
+      else if (action === "upload-file" || action === "new-folder" || action === "open-folder") showAppModal(button.textContent.trim() || "إدارة الملفات");
+      else if (action === "filter-all" || action === "filter-upcoming" || action === "filter-ended") {
+        button.parentElement?.querySelectorAll(".active").forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        showAppToast("تم تطبيق التصفية محلياً. ستظهر النتائج الحقيقية بعد ربط API.");
+      }
+      else if (action === "details" || action === "view-all") showAppModal(button.textContent.trim() || "عرض التفاصيل", "لا توجد بيانات حقيقية كافية للعرض حتى الآن.");
+      else if (action === "send-contact" || action === "book-call" || action === "contact-card") showAppModal(button.textContent.trim() || "تواصل معنا", "سيتم إرسال الطلب عند ربط نموذج التواصل الحقيقي.");
+      else if (action === "edit-profile" || action === "settings-tool") showAppModal(button.textContent.trim() || "إعدادات الحساب", "تم تجهيز الواجهة وسيتم الحفظ عبر API المستخدم.");
+      else if (action === "meeting-control") {
+        button.classList.toggle("active");
+        showAppToast("تم تحديث حالة أداة الاجتماع محلياً.");
+      }
+      else if (action === "meeting-summary") showAppModal("ملخص الاجتماع", "سيظهر الملخص بعد انتهاء الاجتماع وربط خدمة Vexwyn AI.");
+      else if (action === "save-settings") showAppToast("تم حفظ الحالة محلياً. الربط الحقيقي ينتظر API المستخدم.");
+      else if (action === "reset-settings") showAppToast("تمت إعادة تعيين الحقول محلياً.");
+      else if (action === "leave-meeting") location.hash = "#/app/meetings";
+      else if (action === "select-plan") showAppModal("اختيار الخطة", "سيتم تفعيل الدفع عند ربط مزود الفوترة الحقيقي.");
+      else showAppModal(button.textContent.trim() || "إجراء");
+    });
+  });
+
+  document.querySelectorAll("[data-toggle]").forEach((row) => {
+    row.addEventListener("click", () => row.querySelector(".toggle")?.classList.toggle("on"));
+  });
+
+  document.querySelectorAll("[data-chat-form]").forEach((form) => {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const input = form.querySelector("input");
+      const message = input?.value.trim();
+      if (!message) {
+        showAppToast("اكتب رسالة أولاً.");
+        return;
+      }
+      showAppToast("تم تجهيز الرسالة محلياً بانتظار API المحادثات.");
+      input.value = "";
+    });
+  });
+}
+
+function login() {
+  return `<div class="bg-orbit"></div><main class="login-page auth-page" dir="rtl">
+    <section class="login-card">
+      ${brand()}<h1>تسجيل الدخول</h1><p>سجل دخولك للوصول إلى اجتماعاتك وإدارة فريقك بسهولة</p>
+      <form id="login-form" novalidate>
+        <div class="field"><label>البريد الإلكتروني</label><input name="email" type="email" placeholder="name@company.com"></div>
+        <div class="field"><label>كلمة المرور</label><input name="password" placeholder="••••••••••••" type="password"></div>
+        <div class="row-between"><button class="auth-link gradient-text" type="button" data-auth-demo>نسيت كلمة المرور؟</button><label><input type="checkbox" checked> تذكرني</label></div>
+        <button class="primary-btn" style="width:100%;margin:22px 0" type="submit">تسجيل الدخول</button>
+      </form>
+      <a class="outline-btn" style="width:100%" href="#/signup">إنشاء حساب جديد</a>
+      <div class="row-between auth-divider"><span></span>أو<span></span></div>
+      <button class="outline-btn" style="width:100%" type="button" data-auth-demo>G المتابعة بحساب العمل</button>
+      <p>${icons.shield} دخول آمن ومشفر</p>
+    </section>
+    <section class="login-left"><h2><span class="gradient-text">اجتماعات أكثر إنتاجية.</span><br>تواصل أوضح. فرق أقوى.</h2><p>من مكالمات الفيديو إلى إدارة المهام والتقويم، كل ما تحتاجه في منصة واحدة متكاملة.</p><div class="meeting-stage">${videoMockup()}${scheduleCard()}</div></section>
+  </main>`;
+}
+
+function signup() {
+  return `<div class="bg-orbit"></div><main class="login-page auth-page signup-page" dir="rtl">
+    <section class="login-card">
+      ${brand()}<h1>إنشاء حساب جديد</h1><p>ابدأ مساحة Vexwyn لفريقك خلال لحظات.</p>
+      <form id="signup-form" novalidate>
+        <div class="field"><label>الاسم الكامل</label><input name="name" placeholder="أحمد خالد"></div>
+        <div class="field"><label>البريد الإلكتروني</label><input name="email" type="email" placeholder="name@company.com"></div>
+        <div class="field"><label>اسم الفريق أو الشركة</label><input name="team" placeholder="فريق المشروع"></div>
+        <div class="field"><label>كلمة المرور</label><input name="password" placeholder="••••••••••••" type="password"></div>
+        <label class="auth-check"><input type="checkbox" checked> أوافق على شروط الاستخدام وسياسة الخصوصية</label>
+        <button class="primary-btn" style="width:100%;margin:20px 0 12px" type="submit">إنشاء الحساب والدخول</button>
+      </form>
+      <a class="outline-btn" style="width:100%" href="#/login">لدي حساب بالفعل</a>
+      <p>${icons.shield} تجربة آمنة ومشفرة</p>
+    </section>
+    <section class="login-left"><h2><span class="gradient-text">ابدأ مجانا.</span><br>نظم اجتماعاتك وملفاتك من مكان واحد.</h2><p>سيتم إنشاء مساحة محلية مباشرة، ثم يمكن ربطها بالباكند عند توفر API التسجيل.</p><div class="meeting-stage">${videoMockup()}${scheduleCard()}</div></section>
+  </main>`;
+}
+
+function bindAuth() {
+  const loginForm = document.getElementById("login-form");
+  if (loginForm) {
+    loginForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(loginForm);
+      localStorage.setItem("vexwyn-user-session", JSON.stringify({
+        type: "login",
+        email: data.get("email") || "user@vexwyn.com",
+        createdAt: new Date().toISOString()
+      }));
+      location.hash = "#/app";
+    });
+  }
+
+  const signupForm = document.getElementById("signup-form");
+  if (signupForm) {
+    signupForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(signupForm);
+      localStorage.setItem("vexwyn-user-session", JSON.stringify({
+        type: "signup",
+        name: data.get("name") || "أحمد خالد",
+        email: data.get("email") || "user@vexwyn.com",
+        team: data.get("team") || "فريق المشروع",
+        createdAt: new Date().toISOString()
+      }));
+      location.hash = "#/app";
+    });
+  }
+
+  document.querySelectorAll("[data-auth-demo]").forEach((button) => {
+    button.addEventListener("click", () => {
+      localStorage.setItem("vexwyn-user-session", JSON.stringify({ type: "work-account", createdAt: new Date().toISOString() }));
+      location.hash = "#/app";
+    });
+  });
+}
+
+function landing() {
+  return `
+    <div class="vx-page-bg"></div>
+    ${publicHeader()}
+    <main class="vx-home">
+      <section class="vx-hero">
+        <div class="vx-visual">
+          <div class="vx-video-card">
+            <div class="vx-video-bar"><b><span class="mini-v">V</span> Vexwyn Meeting</b><span>● 00:00:00 ⛶ ⋮</span></div>
+            <div class="vx-video-body">
+              <div class="vx-person vx-person-main"><span>أحمد خالد</span></div>
+              <div class="vx-video-side">
+                <div class="vx-person"><span>سارة محمد</span></div>
+                <div class="vx-person"><span>أحمد خالد</span></div>
+                <div class="vx-person"><span>ليلى سالم</span></div>
+                <div class="vx-more">+0<br><small>أعضاء آخرون</small></div>
+              </div>
+            </div>
+            <div class="vx-video-controls"><span>كتم الصوت</span><span>إيقاف الفيديو</span><span>المشاركة</span><span>المشاركون</span><span>التسجيل</span><b>⏻</b></div>
+          </div>
+          <aside class="vx-calendar-card">
+            <div><span>+</span><b>جدول الاجتماعات</b><span>▣</span></div>
+            ${["لا توجد اجتماعات|0:00", "اربط التقويم|0:00", "ابدأ جدولة|0:00"].map((row) => {
+              const [title, time] = row.split("|");
+              return `<article><h4>${title}</h4><p>${time}</p><span class="vx-dots"></span><button>▣</button></article>`;
+            }).join("")}
+          </aside>
+        </div>
+        <div class="vx-copy">
+          <span class="vx-pill">◈ منصة اجتماعات آمنة وسهلة</span>
+          <h1>اجتماعات أفضل.<br><strong>تواصل بلا حدود.</strong></h1>
+          <p>Vexwyn تجمع فريقك في مساحة واحدة للاجتماعات المرئية، المحادثات الفورية، ومشاركة الملفات بسلاسة وأمان تام.</p>
+          <div class="vx-hero-actions"><a class="primary-btn" href="#/signup">ابدأ مجاناً ←</a><a class="outline-btn" href="#/contact">احجز عرضاً توضيحياً ▣</a></div>
+          <div class="vx-trust"><span>◈ أمان على مستوى المؤسسات</span><span>ϟ يعمل داخل متصفح</span><span>◌ لا يتطلب تثبيت</span></div>
+        </div>
+      </section>
+      <section class="vx-home-grid">
+        <article class="vx-panel vx-feature-list"><h3>كل ما تحتاجه في مكان واحد</h3>${["جودة عالية","مشاركة الملفات","دردشة تفاعلية","اجتماعات مسجلة"].map((item) => `<p>${item}<b>✓</b></p>`).join("")}</article>
+        <article class="vx-panel vx-dashboard"><h3>لوحة التحكم ▦</h3><div>${["الاجتماعات اليوم|0","إجمالي المشاركين|0","ساعات الاجتماعات|0","مستوى المشاركة|0%"].map((row, index) => { const [title, value] = row.split("|"); return `<section><small>${title}</small><strong>${value}</strong>${index === 3 ? "<i></i>" : "<em></em>"}</section>`; }).join("")}</div></article>
+        <article class="vx-panel vx-integrations"><h3>تكاملات ذكية ⚙</h3>${["Google Calendar","Microsoft 365","Slack","Zoom","Drive","المزيد"].map((item) => `<span>${item}</span>`).join("")}</article>
+      </section>
+      <section class="vx-benefits">${["اجتماعات آمنة|حماية متقدمة لبياناتك وخصوصيتك","مشاركة سهلة|شارك روابط الاجتماعات والملفات بكل سهولة","جدولة سريعة|أنشئ اجتماعاتك بنقرة واحدة","دعم متواصل|فريق دعم جاهز لمساعدتك في أي وقت"].map((row) => { const [title, text] = row.split("|"); return `<article><b>${title}</b><span>${text}</span></article>`; }).join("")}</section>
+    </main>
+  `;
+}
+
 function route() {
   const directAdminPath = adminPath();
   if (directAdminPath) {
@@ -617,21 +1007,21 @@ function landing() {
       <section class="vx-hero">
         <div class="vx-visual">
           <div class="vx-video-card">
-            <div class="vx-video-bar"><b><span class="mini-v">V</span> Vexwyn Meeting</b><span>● 00:24:18 ⛶ ⋮</span></div>
+            <div class="vx-video-bar"><b><span class="mini-v">V</span> Vexwyn Meeting</b><span>● 00:00:00 ⛶ ⋮</span></div>
             <div class="vx-video-body">
               <div class="vx-person vx-person-main"><span>حسام الشريف</span></div>
               <div class="vx-video-side">
                 <div class="vx-person"><span>سارة محمد</span></div>
                 <div class="vx-person"><span>أحمد خالد</span></div>
                 <div class="vx-person"><span>ليلى سالم</span></div>
-                <div class="vx-more">+12<br><small>أعضاء آخرون</small></div>
+                <div class="vx-more">+0<br><small>أعضاء آخرون</small></div>
               </div>
             </div>
             <div class="vx-video-controls"><span>كتم الصوت</span><span>إيقاف الفيديو</span><span>المشاركة</span><span>المشاركون</span><span>التسجيل</span><b>⏻</b></div>
           </div>
           <aside class="vx-calendar-card">
             <div><span>+</span><b>جدول الاجتماعات</b><span>▣</span></div>
-            ${["مراجعة خطة التسويق|09:00 - 10:00","اجتماع تصميم المنتج|12:30 - 01:30","استعراض المشروع|03:00 - 04:00"].map((row) => {
+            ${["لا توجد اجتماعات|0:00", "اربط التقويم|0:00", "ابدأ جدولة|0:00"].map((row) => {
               const [title, time] = row.split("|");
               return `<article><h4>${title}</h4><p>${time}</p><span class="vx-dots"></span><button>▣</button></article>`;
             }).join("")}
@@ -641,13 +1031,13 @@ function landing() {
           <span class="vx-pill">◈ منصة اجتماعات آمنة وسهلة</span>
           <h1>اجتماعات أفضل.<br><strong>تواصل بلا حدود.</strong></h1>
           <p>Vexwyn تجمع فريقك في مساحة واحدة للاجتماعات المرئية، المحادثات الفورية، ومشاركة الملفات بسلاسة وأمان تام.</p>
-          <div class="vx-hero-actions"><a class="primary-btn" href="#/login">ابدأ مجاناً ←</a><a class="outline-btn" href="#/contact">احجز عرضاً توضيحياً ▣</a></div>
+          <div class="vx-hero-actions"><a class="primary-btn" href="#/signup">ابدأ مجاناً ←</a><a class="outline-btn" href="#/contact">احجز عرضاً توضيحياً ▣</a></div>
           <div class="vx-trust"><span>◈ أمان على مستوى المؤسسات</span><span>⚡ يعمل داخل متصفح</span><span>◌ لا يتطلب تثبيت</span></div>
         </div>
       </section>
       <section class="vx-home-grid">
         <article class="vx-panel vx-feature-list"><h3>كل ما تحتاجه في مكان واحد</h3>${["جودة عالية","مشاركة الملفات","دردشة تفاعلية","اجتماعات مسجلة"].map((x) => `<p>${x}<b>✓</b></p>`).join("")}</article>
-        <article class="vx-panel vx-dashboard"><h3>لوحة التحكم ▦</h3><div>${["الاجتماعات اليوم|6","إجمالي المشاركين|128","ساعات الاجتماعات|24.5","مستوى المشاركة|85%"].map((x, i) => { const [a,b]=x.split("|"); return `<section><small>${a}</small><strong>${b}</strong>${i===3?'<i></i>':'<em></em>'}</section>`; }).join("")}</div></article>
+        <article class="vx-panel vx-dashboard"><h3>لوحة التحكم ▦</h3><div>${["الاجتماعات اليوم|0","إجمالي المشاركين|0","ساعات الاجتماعات|0","مستوى المشاركة|0%"].map((x, i) => { const [a,b]=x.split("|"); return `<section><small>${a}</small><strong>${b}</strong>${i===3?'<i></i>':'<em></em>'}</section>`; }).join("")}</div></article>
         <article class="vx-panel vx-integrations"><h3>تكاملات ذكية ⚙</h3>${["Google Calendar","Microsoft 365","Slack","Zoom","Drive","المزيد"].map((x) => `<span>${x}</span>`).join("")}</article>
       </section>
       <section class="vx-benefits">${["اجتماعات آمنة|حماية متقدمة لبياناتك وخصوصيتك","مشاركة سهلة|شارك روابط الاجتماعات والملفات بكل سهولة","جدولة سريعة|أنشئ اجتماعاتك بنقرة واحدة","دعم متواصل|فريق دعم جاهز لمساعدتك في أي وقت"].map((x) => { const [a,b]=x.split("|"); return `<article><b>${a}</b><span>${b}</span></article>`; }).join("")}</section>
@@ -707,7 +1097,7 @@ function adminSidebar(active) {
 }
 
 function adminTopbar() {
-  return `<header class="admin-topbar"><div class="admin-health"><b></b><span>النظام يعمل بكفاءة</span><small>99.92% وقت التشغيل</small></div><button class="admin-outline" data-admin-modal="إجراءات سريعة">إجراءات سريعة ⚡</button><label class="admin-search"><kbd>⌘K</kbd><input placeholder="البحث في النظام..."></label><button class="admin-square">🔔</button><button class="admin-outline">العربية ◌</button></header>`;
+  return `<header class="admin-topbar"><div class="admin-health"><b></b><span>النظام متصل بالبيانات</span><small>0% حتى تحميل API</small></div><button class="admin-outline" data-admin-modal="إجراءات سريعة">إجراءات سريعة ⚡</button><label class="admin-search"><kbd>⌘K</kbd><input placeholder="البحث في النظام..."></label><button class="admin-square">🔔</button><button class="admin-outline">العربية ◌</button></header>`;
 }
 
 function adminShell(active, content) {
@@ -744,7 +1134,7 @@ function vxAdminTable(key) {
 
 function vxAdminSidePanel(key) {
   return `<aside class="vx-admin-side">
-    <section class="admin-panel"><h2>تفاصيل ${vxPages[key]?.[0]?.replace("إدارة ", "") || "النظام"}</h2><div class="vx-ring"><b>${key === "overview" ? "99.92%" : vxPages[key][3][0][1]}</b><span>${vxPages[key][3][0][0]}</span></div><p class="vx-muted">آخر تحديث: اليوم 10:30 ص</p><button class="admin-primary" data-admin-modal="عرض التفاصيل">عرض التفاصيل</button><button class="admin-outline" data-admin-modal="تعديل">تعديل</button></section>
+    <section class="admin-panel"><h2>تفاصيل ${vxPages[key]?.[0]?.replace("إدارة ", "") || "النظام"}</h2><div class="vx-ring"><b>0</b><span>${vxPages[key][3][0][0]}</span></div><p class="vx-muted">مرتبط بالبيانات الحقيقية من API</p><button class="admin-primary" data-admin-modal="عرض التفاصيل">عرض التفاصيل</button><button class="admin-outline" data-admin-modal="تعديل">تعديل</button></section>
     <section class="admin-panel"><h2>نشاط آخر 30 يوماً</h2>${vxMiniChart()}<strong>${vxPages[key][3][1][1]}</strong><p class="vx-muted">${vxPages[key][3][1][0]}</p></section>
   </aside>`;
 }
@@ -812,9 +1202,9 @@ function login() {
   return `<div class="bg-orbit"></div><main class="login-page auth-page" dir="rtl">
     <section class="login-card">
       ${brand()}<h1>تسجيل الدخول</h1><p>سجل دخولك للوصول إلى اجتماعاتك وإدارة فريقك بسهولة</p>
-      <form id="login-form">
-        <div class="field"><label>البريد الإلكتروني</label><input name="email" type="email" placeholder="name@company.com" required></div>
-        <div class="field"><label>كلمة المرور</label><input name="password" placeholder="••••••••••••" type="password" required></div>
+      <form id="login-form" novalidate>
+        <div class="field"><label>البريد الإلكتروني</label><input name="email" type="email" placeholder="name@company.com"></div>
+        <div class="field"><label>كلمة المرور</label><input name="password" placeholder="••••••••••••" type="password"></div>
         <div class="row-between"><button class="auth-link gradient-text" type="button" data-auth-demo>نسيت كلمة المرور؟</button><label><input type="checkbox" checked> تذكرني</label></div>
         <button class="primary-btn" style="width:100%;margin:22px 0" type="submit">تسجيل الدخول</button>
       </form>
@@ -831,12 +1221,12 @@ function signup() {
   return `<div class="bg-orbit"></div><main class="login-page auth-page signup-page" dir="rtl">
     <section class="login-card">
       ${brand()}<h1>إنشاء حساب جديد</h1><p>ابدأ مساحة Vexwyn لفريقك خلال لحظات.</p>
-      <form id="signup-form">
-        <div class="field"><label>الاسم الكامل</label><input name="name" placeholder="أحمد خالد" required></div>
-        <div class="field"><label>البريد الإلكتروني</label><input name="email" type="email" placeholder="name@company.com" required></div>
-        <div class="field"><label>اسم الفريق أو الشركة</label><input name="team" placeholder="فريق المشروع" required></div>
-        <div class="field"><label>كلمة المرور</label><input name="password" placeholder="••••••••••••" type="password" minlength="6" required></div>
-        <label class="auth-check"><input type="checkbox" required> أوافق على شروط الاستخدام وسياسة الخصوصية</label>
+      <form id="signup-form" novalidate>
+        <div class="field"><label>الاسم الكامل</label><input name="name" placeholder="أحمد خالد"></div>
+        <div class="field"><label>البريد الإلكتروني</label><input name="email" type="email" placeholder="name@company.com"></div>
+        <div class="field"><label>اسم الفريق أو الشركة</label><input name="team" placeholder="فريق المشروع"></div>
+        <div class="field"><label>كلمة المرور</label><input name="password" placeholder="••••••••••••" type="password"></div>
+        <label class="auth-check"><input type="checkbox" checked> أوافق على شروط الاستخدام وسياسة الخصوصية</label>
         <button class="primary-btn" style="width:100%;margin:20px 0 12px" type="submit">إنشاء الحساب والدخول</button>
       </form>
       <a class="outline-btn" style="width:100%" href="#/login">لدي حساب بالفعل</a>
@@ -851,7 +1241,12 @@ function bindAuth() {
   if (loginForm) {
     loginForm.addEventListener("submit", (event) => {
       event.preventDefault();
-      localStorage.setItem("vexwyn-user-session", JSON.stringify({ type: "login", createdAt: new Date().toISOString() }));
+      const data = new FormData(loginForm);
+      localStorage.setItem("vexwyn-user-session", JSON.stringify({
+        type: "login",
+        email: data.get("email") || "user@vexwyn.com",
+        createdAt: new Date().toISOString()
+      }));
       location.hash = "#/app";
     });
   }
@@ -863,9 +1258,9 @@ function bindAuth() {
       const data = new FormData(signupForm);
       localStorage.setItem("vexwyn-user-session", JSON.stringify({
         type: "signup",
-        name: data.get("name"),
-        email: data.get("email"),
-        team: data.get("team"),
+        name: data.get("name") || "أحمد خالد",
+        email: data.get("email") || "user@vexwyn.com",
+        team: data.get("team") || "فريق المشروع",
         createdAt: new Date().toISOString()
       }));
       location.hash = "#/app";
@@ -985,7 +1380,7 @@ function adminGenericPage(key = "overview") {
   const page = vxPages[key] || vxPages.overview;
   const [title, subtitle, icon, stats, primary] = page;
   const metricCards = VX_ENABLE_DEMO_DATA
-    ? stats.map(([a, b, c, d]) => adminStat(a, b, c, d)).join("")
+    ? stats.map(([a, b, c]) => adminStat(a, "0", c, "مرتبط بالبيانات الحقيقية")).join("")
     : vxMetricCards(key).map(([titleText, metricPath, metricIcon, options]) => adminMetric(titleText, metricPath, metricIcon, options)).join("");
 
   return adminShell(key, `<div class="admin-actions"><button class="admin-primary" data-admin-modal="${primary}">＋ ${primary}</button><button class="admin-outline" data-admin-modal="تصدير">تصدير ⇩</button><button class="admin-outline" data-admin-modal="تصفية">تصفية ⌕</button></div>${adminApiBanner()}<section class="admin-hero vx-admin-hero"><div><h1>${title}</h1><p>${subtitle}</p></div><div class="admin-hero-art"><span>${icon}</span></div></section><section class="admin-kpis">${metricCards}</section><section class="vx-admin-layout"><div>${vxAdminTable(key)}<div class="admin-panel"><h2>نشاط المنصة</h2>${VX_ENABLE_DEMO_DATA ? vxMiniChart() : '<p class="vx-empty-state">لا توجد بيانات كافية حتى الآن.</p>'}</div></div>${vxAdminSidePanel(key)}</section><section class="admin-feature-row"><article>أمان على مستوى المؤسسات<span>تشفير متقدم وسجل تدقيق شامل.</span></article><article>التحكم في الأدوار والصلاحيات<span>إدارة دقيقة للمستخدمين والفرق.</span></article><article>سجلات التدقيق والمراجعة<span>تتبع كامل لكل الأنشطة والتغييرات.</span></article></section>`);
@@ -996,7 +1391,7 @@ function adminLogin() {
     ? "سيتم تسجيل الدخول عبر الباكند المنشور على Render."
     : "رابط الباكند غير مضبوط بعد. ضع Render URL في config.js.";
 
-  return `<main class="admin-login vx-admin-login" dir="rtl"><header>${adminLogo()}<nav><a href="#/">العودة إلى الموقع ←</a><span>العربية ◌</span><span>مركز المساعدة ؟</span></nav></header><section><aside class="admin-login-showcase"><div class="admin-shield">▣</div><h1><span>Vexwyn</span> بوابة إدارة</h1><h2>تسجيل دخول المسؤولين</h2><p>وصول آمن لإدارة المنصة وقراءة البيانات الحقيقية من PostgreSQL عبر Render.</p><div class="admin-login-mini">${adminStat("مصدر البيانات","PostgreSQL","▥","بدون بيانات وهمية")}${adminStat("حالة API", vxApiReady() ? "متصل" : "غير مضبوط","▣", apiHint)}${adminStat("وضع Demo", VX_ENABLE_DEMO_DATA ? "مفعل" : "مغلق","◈","الإنتاج يتطلب false")}</div></aside><form class="admin-login-card" id="admin-login-form"><h1>تسجيل الدخول إلى لوحة الإدارة</h1><p>${apiHint}</p><label>البريد الإداري<input name="email" type="email" placeholder="admin@vexwyn.com" required></label><label>كلمة المرور<input name="password" type="password" placeholder="أدخل كلمة المرور" required></label><button class="admin-primary" type="submit">دخول آمن 🔒</button><div class="admin-divider">أو</div><button class="admin-outline" type="button" data-admin-modal="SSO يحتاج تفعيل مزود الهوية في الباكند">تسجيل الدخول عبر SSO ◈</button></form></section><footer>جميع الحقوق محفوظة © 2025 Vexwyn</footer><div id="admin-modal-root"></div></main>`;
+  return `<main class="admin-login vx-admin-login" dir="rtl"><header>${adminLogo()}<nav><a href="#/">العودة إلى الموقع ←</a><span>العربية ◌</span><span>مركز المساعدة ؟</span></nav></header><section><aside class="admin-login-showcase"><div class="admin-shield">▣</div><h1><span>Vexwyn</span> بوابة إدارة</h1><h2>تسجيل دخول المسؤولين</h2><p>وصول آمن لإدارة المنصة وقراءة البيانات الحقيقية من PostgreSQL عبر Render.</p><div class="admin-login-mini">${adminStat("مصدر البيانات","PostgreSQL","▥","بدون بيانات وهمية")}${adminStat("حالة API", vxApiReady() ? "متصل" : "غير مضبوط","▣", apiHint)}${adminStat("وضع Demo", VX_ENABLE_DEMO_DATA ? "مفعل" : "مغلق","◈","الإنتاج يتطلب false")}</div></aside><form class="admin-login-card" id="admin-login-form" novalidate><h1>تسجيل الدخول إلى لوحة الإدارة</h1><p>${apiHint}</p><label>البريد الإداري<input name="email" type="email" placeholder="admin@vexwyn.com"></label><label>كلمة المرور<input name="password" type="password" placeholder="أدخل كلمة المرور"></label><button class="admin-primary" type="submit">دخول آمن 🔒</button><div class="admin-divider">أو</div><button class="admin-outline" type="button" data-admin-modal="SSO يحتاج تفعيل مزود الهوية في الباكند">تسجيل الدخول عبر SSO ◈</button></form></section><footer>جميع الحقوق محفوظة © 2025 Vexwyn</footer><div id="admin-modal-root"></div></main>`;
 }
 
 async function hydrateAdminPage(key) {
@@ -1101,6 +1496,7 @@ function route() {
   else if (hash === "/login") app.innerHTML = login();
   else if (hash === "/signup") app.innerHTML = signup();
   else if (hash === "/pricing") app.innerHTML = pricing(true);
+  else if (hash === "/contact") app.innerHTML = contactPage();
   else if (hash === "/app") app.innerHTML = dashboard();
   else if (hash === "/app/meetings/room") app.innerHTML = meetingRoom();
   else if (hash === "/app/meetings") app.innerHTML = meetings();
@@ -1109,10 +1505,18 @@ function route() {
   else if (hash === "/app/teams") app.innerHTML = teams();
   else if (hash === "/app/files") app.innerHTML = files();
   else if (hash === "/app/settings") app.innerHTML = settings();
-  else if (hash === "/app/billing") app.innerHTML = pricing(false);
+  else if (hash === "/app/billing" || hash === "/app/upgrade") app.innerHTML = billing();
+  else if (hash === "/app/profile") app.innerHTML = settings();
+  else if (hash === "/app/help") app.innerHTML = helpCenter();
   else app.innerHTML = landing();
   bindMega();
   bindAuth();
+  bindAppInteractions();
+}
+
+if (!window.__vexwynPopstateBound) {
+  window.addEventListener("popstate", route);
+  window.__vexwynPopstateBound = true;
 }
 
 route();
