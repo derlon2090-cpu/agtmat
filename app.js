@@ -1514,6 +1514,201 @@ function route() {
   bindAppInteractions();
 }
 
+/* Pixel-refined Vexwyn public and user dashboard layer */
+function brand() {
+  return `<a class="brand vx2-brand" href="#/"><span class="mark" aria-hidden="true"></span><span>Vexwyn</span></a>`;
+}
+
+function publicHeader(active = "") {
+  const nav = [
+    ["products", "المنتجات"],
+    ["pricing", "الأسعار", "#/pricing"],
+    ["resources", "الموارد"],
+    ["company", "الشركة"],
+    ["contact", "تواصل معنا", "#/contact"]
+  ];
+  return `
+    <header class="public-header vx2-header">
+      ${brand()}
+      <nav class="public-nav vx2-public-nav">
+        ${nav.map(([key, label, href]) => href
+          ? `<a class="nav-link ${active === key ? "active" : ""}" href="${href}">${label}</a>`
+          : `<button class="nav-link ${active === key ? "active" : ""}" data-mega="${key}">${label}⌄</button>`
+        ).join("")}
+      </nav>
+      <div class="public-actions vx2-public-actions">
+        <span class="ghost-btn">العربية ◌</span>
+        <a class="ghost-btn" href="#/login">تسجيل الدخول</a>
+        <a class="primary-btn" href="#/signup">ابدأ مجاناً</a>
+      </div>
+    </header>
+    <div id="mega-root"></div>
+  `;
+}
+
+function landing() {
+  return `
+    <div class="vx2-bg"></div>
+    ${publicHeader()}
+    <main class="vx2-home">
+      <section class="vx2-hero">
+        <div class="vx2-visual" aria-label="معاينة اجتماع Vexwyn">
+          <div class="vx2-video">
+            <div class="vx2-video-top"><b><span class="mini-v">V</span> Vexwyn Meeting</b><span>● 00:24:18 ⛶ ⋮</span></div>
+            <div class="vx2-video-grid">
+              <div class="vx2-person vx2-main-person"><span>حسام الشريف</span></div>
+              <div class="vx2-side-people">
+                <div class="vx2-person vx2-small-person"><span>سارة محمد</span></div>
+                <div class="vx2-person vx2-small-person"><span>أحمد خالد</span></div>
+                <div class="vx2-person vx2-small-person"><span>ليلى منصور</span></div>
+                <div class="vx2-more">+12<br><small>أعضاء آخرون</small></div>
+              </div>
+            </div>
+            <div class="vx2-video-bottom"><span>كتم الصوت</span><span>إيقاف الفيديو</span><span>الدردشة</span><span>المشاركون</span><span>التسجيل</span><b>⌕</b></div>
+          </div>
+          <aside class="vx2-schedule">
+            <div class="vx2-schedule-head"><span>+</span><b>جدول الاجتماعات</b><span>▦</span></div>
+            ${["مراجعة خطة التسويق|09:00 - 10:00", "اجتماع تصميم المنتج|12:30 - 01:30", "استعراض المشروع|03:00 - 04:00"].map((row) => {
+              const [title, time] = row.split("|");
+              return `<article><h4>${title}</h4><p>${time}</p><span class="vx2-avatar-row"><i></i><i></i><i></i><i></i></span><button type="button" data-app-action="schedule-meeting">▣</button></article>`;
+            }).join("")}
+          </aside>
+        </div>
+        <div class="vx2-copy">
+          <span class="vx2-pill">◇ منصة اجتماعات آمنة وسهلة</span>
+          <h1>اجتماعات أفضل.<br><strong>تواصل بلا حدود.</strong></h1>
+          <p>تجمع Vexwyn فريقك في مساحة واحدة للاجتماعات المرئية، المحادثات الفورية، ومشاركة الملفات بسلاسة وأمان تام.</p>
+          <div class="vx2-actions"><a class="primary-btn" href="#/signup">ابدأ مجاناً ←</a><a class="outline-btn" href="#/contact">احجز عرضاً توضيحياً ▦</a></div>
+          <div class="vx2-trust"><span>◇ أمان على مستوى المؤسسات</span><span>⚡ يعمل داخل متصفح</span><span>◌ لا يتطلب تثبيت</span></div>
+        </div>
+      </section>
+      <section class="vx2-home-grid">
+        <article class="vx2-panel vx2-features"><h3>كل ما تحتاجه في مكان واحد</h3>${["جودة عالية","مشاركة الملفات","دردشة تفاعلية","اجتماعات مسجلة"].map((item) => `<p><span>${item}</span><b>✓</b></p>`).join("")}</article>
+        <article class="vx2-panel vx2-dashboard"><h3>لوحة التحكم ▦</h3><div>${["الاجتماعات اليوم|0","إجمالي المشاركين|0","ساعات الاجتماعات|0","مستوى المشاركة|0%"].map((row, index) => { const [label, value] = row.split("|"); return `<section><small>${label}</small><strong>${value}</strong>${index === 3 ? "<i></i>" : "<em></em>"}</section>`; }).join("")}</div></article>
+        <article class="vx2-panel vx2-integrations"><h3>تكاملات ذكية ⚙</h3>${["Google Calendar","Microsoft 365","Slack","Zoom","Drive","المزيد"].map((item) => `<span>${item}</span>`).join("")}</article>
+      </section>
+      <section class="vx2-benefits">${["اجتماعات آمنة|حماية متقدمة لبياناتك وخصوصيتك","مشاركة سهلة|شارك روابط الاجتماعات والملفات بكل سهولة","جدولة سريعة|أنشئ اجتماعاتك بنقرة واحدة من أي مكان","دعم متواصل|فريق دعم جاهز لمساعدتك في أي وقت"].map((row) => { const [title, text] = row.split("|"); return `<article><b>${title}</b><span>${text}</span></article>`; }).join("")}</section>
+    </main>
+  `;
+}
+
+function appNav(active) {
+  const nav = [
+    ["dashboard", "الرئيسية", "⌂", "#/app"],
+    ["meetings", "الاجتماعات", "▣", "#/app/meetings"],
+    ["calendar", "التقويم", "▦", "#/app/calendar"],
+    ["messages", "الرسائل", "☏", "#/app/messages"],
+    ["teams", "الفرق", "♙", "#/app/teams"],
+    ["files", "الملفات", "▤", "#/app/files"],
+    ["settings", "الإعدادات", "⚙", "#/app/settings"]
+  ];
+  return nav.map(([key, label, icon, href]) => `<a class="side-link ux2-nav-link ${active === key ? "active" : ""}" href="${href}"><span>${label}</span><b>${icon}</b></a>`).join("");
+}
+
+function userProfile() {
+  try {
+    const saved = JSON.parse(localStorage.getItem("vexwyn-user-session") || "{}");
+    return {
+      name: saved.name || "أحمد خالد",
+      email: saved.email || "ahmad@vexwyn.com",
+      team: saved.team || "فريق المشروع"
+    };
+  } catch {
+    return { name: "أحمد خالد", email: "ahmad@vexwyn.com", team: "فريق المشروع" };
+  }
+}
+
+function shell(active, content) {
+  const profile = userProfile();
+  return `<div class="app-shell ux-shell ux2-shell">
+    <main>
+      <div class="topbar ux-topbar ux2-topbar"><button type="button">♢<sup>0</sup></button><a href="#/app/settings">⚙</a><input class="search" placeholder="ابحث في الاجتماعات، الرسائل، الفرق..."></div>
+      <div class="app-content ux-content ux2-content">${content}</div>
+    </main>
+    <aside class="sidebar ux-sidebar ux2-sidebar">
+      ${brand()}
+      <a class="user-card ux2-user-card" href="#/app/profile"><span>⌄</span><div><b>${profile.name}</b><p>مدير المشروع</p><small>● متصل</small></div><span class="avatar">${profile.name[0] || "أ"}</span></a>
+      <nav class="nav-stack">${appNav(active)}</nav>
+      <div class="upgrade-card ux2-upgrade"><h3>ترقية الخطة</h3><p>احصل على مزايا متقدمة وإمكانات أكبر بلا حدود.</p><a class="primary-btn" href="#/app/billing">ترقية الآن ✦</a></div>
+    </aside>
+    <div id="app-modal-root"></div><div id="app-toast-root"></div>
+  </div>`;
+}
+
+function appHeader(title, subtitle, icon, actions = "") {
+  return `<div class="page-title ux-page-title ux2-page-title"><div><h1>${title} <span>${icon || ""}</span></h1><p>${subtitle}</p></div><div class="ux2-actions-row">${actions}</div></div>`;
+}
+
+function appAction(label, action, primary = false) {
+  return `<button class="${primary ? "primary-btn" : "outline-btn"}" type="button" data-app-action="${action}">${label}</button>`;
+}
+
+function ux2ZeroRows(title, rows) {
+  return `<article class="panel ux2-card ux2-list"><h3>${title}</h3>${rows.map((row) => `<p><span>${row}</span><b>0</b></p>`).join("")}</article>`;
+}
+
+function dashboard() {
+  return shell("dashboard", `
+    ${appHeader("مرحباً بعودتك، أحمد", "إدارة اجتماعاتك وفرقك بسهولة وكفاءة.", "", "")}
+    <section class="ux2-home-board">
+      <aside class="panel ux2-quick"><h3>إجراءات سريعة</h3><div>${[
+        ["▣", "اجتماع جديد", "new-meeting"],
+        ["↪", "انضم لاجتماع", "join-meeting"],
+        ["▦", "جدولة اجتماع", "schedule-meeting"],
+        ["▭", "مشاركة الشاشة", "screen-share"]
+      ].map(([icon, label, action]) => `<button type="button" data-app-action="${action}"><span>${icon}</span><b>${label}</b></button>`).join("")}</div></aside>
+      <article class="panel ux2-next-meeting">
+        <div class="ux2-calendar-art">▦</div>
+        <div><span class="pill">الاجتماع القادم</span><h2>مراجعة خطة المشروع</h2><p>سيتم عرض تفاصيل الاجتماع من البيانات الحقيقية عند توفرها.</p><div class="ux2-inline-meta"><span>غير محدد</span><span>0 مشارك</span></div></div>
+        <div class="ux2-meeting-actions">${appAction("انضم الآن", "join-meeting", true)}${appAction("تفاصيل الاجتماع", "details")}</div>
+      </article>
+    </section>
+    <section class="ux2-stat-row">${[
+      ["اجتماعات اليوم", "0", "▦"],
+      ["إجمالي الساعات", "0", "◷"],
+      ["المشاركون النشطون", "0", "♙"],
+      ["معدل الحضور", "0%", "◌"]
+    ].map(([title, value, icon]) => `<article class="panel ux2-stat"><span>${icon}</span><small>${title}</small><strong>${value}</strong><em></em></article>`).join("")}</section>
+    <section class="ux2-dashboard-panels">
+      ${ux2ZeroRows("آخر التحديثات", ["لا توجد تحديثات بعد", "لا توجد أنشطة جديدة", "سجل الاجتماعات سيظهر هنا"])}
+      ${ux2ZeroRows("المهام", ["لا توجد مهام نشطة", "أنشئ مهمة بعد أول اجتماع", "سيتم حفظ المهام هنا"])}
+      ${ux2ZeroRows("جدول اليوم", ["لا توجد اجتماعات اليوم", "لا توجد مهام مجدولة", "لا توجد تسجيلات جديدة"])}
+      <article class="panel ux2-live-card"><h3>الغرفة الحالية</h3><div class="ux2-live-preview"></div><h4>لا توجد جلسة مباشرة</h4><p>ابدأ اجتماعاً لعرض الغرفة هنا.</p><button class="outline-btn" type="button" data-app-action="join-meeting">فتح الغرفة</button></article>
+    </section>
+  `);
+}
+
+function leftAside() {
+  return `${ux2ZeroRows("جدول اليوم", ["لا توجد اجتماعات اليوم", "لا توجد مهام مجدولة", "لا توجد تسجيلات جديدة"])}${ux2ZeroRows("إحصائيات", ["اجتماعات هذا الأسبوع", "إجمالي ساعات الاجتماعات", "متوسط الحضور"])}`;
+}
+
+function upgradePanel() {
+  return `<article class="panel ux2-card ux2-upgrade-panel"><h3>ترقية الخطة</h3><p>احصل على جلسات غير محدودة وتحليلات أكثر احترافية.</p><div></div><a class="primary-btn" href="#/app/billing">ترقية الآن ✦</a></article>`;
+}
+
+function filters() {
+  return `<div class="ux2-filters"><input class="search" placeholder="ابحث هنا..."><button class="outline-btn active" type="button" data-app-action="filter-all">الكل</button><button class="outline-btn" type="button" data-app-action="filter-upcoming">القادمة</button><button class="outline-btn" type="button" data-app-action="filter-ended">المنتهية</button></div>`;
+}
+
+function meetingRows() {
+  const rows = [
+    ["مراجعة خطة المشروع", "جاهز للجدولة", "غير محدد", "join-meeting"],
+    ["جلسة تخطيط الربع القادم", "قادم", "0 مشارك", "details"],
+    ["مناقشة التصميم النهائي", "قادم", "0 مشارك", "details"],
+    ["اجتماع متابعة الأداء", "منتهي", "0 مشارك", "details"]
+  ];
+  return `<div class="ux2-meeting-list">${rows.map(([title, state, people, action]) => `<article class="ux2-meeting-row">
+    <div><button class="primary-btn" type="button" data-app-action="${action}">${action === "join-meeting" ? "انضم الآن" : "فتح"}</button><button class="outline-btn" type="button" data-app-action="details">التفاصيل</button></div>
+    <div><h2>${title}</h2><p>سيتم عرض تفاصيل الاجتماع من البيانات الحقيقية عند توفرها.</p><span class="ux2-avatar-row"><i></i><i></i><i></i></span></div>
+    <div><span class="status ${state === "منتهي" ? "ended" : state === "قادم" ? "upcoming" : "live"}">${state}</span><p>${people}</p></div>
+  </article>`).join("")}</div>`;
+}
+
+function meetings() {
+  return shell("meetings", `${appHeader("الاجتماعات", "إدارة جميع اجتماعاتك المباشرة والقادمة والمنتهية بسهولة", "▣", `${appAction("اجتماع جديد", "new-meeting", true)}${appAction("جدولة اجتماع", "schedule-meeting")}`)}
+    <div class="ux2-three-col"><aside>${leftAside()}</aside><section class="panel ux2-main-list">${filters()}${meetingRows()}</section><aside>${upgradePanel()}</aside></div>`);
+}
+
 if (!window.__vexwynPopstateBound) {
   window.addEventListener("popstate", route);
   window.__vexwynPopstateBound = true;
