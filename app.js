@@ -1560,8 +1560,8 @@ function landing() {
               <div class="vx2-side-people">
                 <div class="vx2-person vx2-small-person"><span>سارة محمد</span></div>
                 <div class="vx2-person vx2-small-person"><span>أحمد خالد</span></div>
-                <div class="vx2-person vx2-small-person"><span>ليلى منصور</span></div>
                 <div class="vx2-more">+12<br><small>أعضاء آخرون</small></div>
+                <div class="vx2-person vx2-small-person"><span>ليلى منصور</span></div>
               </div>
             </div>
             <div class="vx2-video-bottom"><span>كتم الصوت</span><span>إيقاف الفيديو</span><span>الدردشة</span><span>المشاركون</span><span>التسجيل</span><b>⌕</b></div>
@@ -1575,11 +1575,9 @@ function landing() {
           </aside>
         </div>
         <div class="vx2-copy">
-          <span class="vx2-pill">◇ منصة اجتماعات آمنة وسهلة</span>
           <h1>اجتماعات أفضل.<br><strong>تواصل بلا حدود.</strong></h1>
           <p>تجمع Vexwyn فريقك في مساحة واحدة للاجتماعات المرئية، المحادثات الفورية، ومشاركة الملفات بسلاسة وأمان تام.</p>
           <div class="vx2-actions"><a class="primary-btn" href="#/signup">ابدأ مجاناً ←</a><a class="outline-btn" href="#/contact">احجز عرضاً توضيحياً ▦</a></div>
-          <div class="vx2-trust"><span>◇ أمان على مستوى المؤسسات</span><span>⚡ يعمل داخل متصفح</span><span>◌ لا يتطلب تثبيت</span></div>
         </div>
       </section>
       <section class="vx2-home-grid">
