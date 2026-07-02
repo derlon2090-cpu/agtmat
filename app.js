@@ -787,21 +787,23 @@ function login() {
 }
 
 function signup() {
-  return `<div class="bg-orbit"></div><main class="login-page auth-page signup-page" dir="rtl">
-    <section class="login-card">
+  return `<div class="bg-orbit"></div><main class="login-page auth-page vx-login-page vx-signup-page" dir="rtl">
+    <section class="login-card vx-login-card vx-signup-card">
       ${brand()}<h1>إنشاء حساب جديد</h1><p>ابدأ مساحة Vexwyn لفريقك خلال لحظات.</p>
       <form id="signup-form" novalidate>
         <div class="field"><label>الاسم الكامل</label><input name="name" placeholder="أحمد خالد"></div>
         <div class="field"><label>البريد الإلكتروني</label><input name="email" type="email" placeholder="name@company.com"></div>
         <div class="field"><label>اسم الفريق أو الشركة</label><input name="team" placeholder="فريق المشروع"></div>
         <div class="field"><label>كلمة المرور</label><input name="password" placeholder="••••••••••••" type="password"></div>
-        <label class="auth-check"><input type="checkbox" checked> أوافق على شروط الاستخدام وسياسة الخصوصية</label>
-        <button class="primary-btn" style="width:100%;margin:20px 0 12px" type="submit">إنشاء الحساب والدخول</button>
+        <label class="auth-check vx-auth-check"><input type="checkbox" checked> أوافق على شروط الاستخدام وسياسة الخصوصية</label>
+        <button class="primary-btn vx-login-submit vx-signup-submit" type="submit">إنشاء الحساب والدخول</button>
       </form>
-      <a class="outline-btn" style="width:100%" href="#/login">لدي حساب بالفعل</a>
-      <p>${icons.shield} تجربة آمنة ومشفرة</p>
+      <a class="outline-btn vx-login-secondary" href="#/login">لدي حساب بالفعل</a>
+      <p class="vx-login-safe">${icons.shield} تجربة آمنة ومشفرة</p>
     </section>
-    <section class="login-left"><h2><span class="gradient-text">ابدأ مجانا.</span><br>نظم اجتماعاتك وملفاتك من مكان واحد.</h2><p>سيتم إنشاء مساحة محلية مباشرة، ثم يمكن ربطها بالباكند عند توفر API التسجيل.</p><div class="meeting-stage">${videoMockup()}${scheduleCard()}</div></section>
+    <section class="login-left vx-login-showcase" aria-label="واجهة اجتماعات Vexwyn">
+      <img src="assets/login-showcase-reference.png" alt="">
+    </section>
   </main>`;
 }
 
@@ -1222,21 +1224,23 @@ function login() {
 }
 
 function signup() {
-  return `<div class="bg-orbit"></div><main class="login-page auth-page signup-page" dir="rtl">
-    <section class="login-card">
+  return `<div class="bg-orbit"></div><main class="login-page auth-page vx-login-page vx-signup-page" dir="rtl">
+    <section class="login-card vx-login-card vx-signup-card">
       ${brand()}<h1>إنشاء حساب جديد</h1><p>ابدأ مساحة Vexwyn لفريقك خلال لحظات.</p>
       <form id="signup-form" novalidate>
         <div class="field"><label>الاسم الكامل</label><input name="name" placeholder="أحمد خالد"></div>
         <div class="field"><label>البريد الإلكتروني</label><input name="email" type="email" placeholder="name@company.com"></div>
         <div class="field"><label>اسم الفريق أو الشركة</label><input name="team" placeholder="فريق المشروع"></div>
         <div class="field"><label>كلمة المرور</label><input name="password" placeholder="••••••••••••" type="password"></div>
-        <label class="auth-check"><input type="checkbox" checked> أوافق على شروط الاستخدام وسياسة الخصوصية</label>
-        <button class="primary-btn" style="width:100%;margin:20px 0 12px" type="submit">إنشاء الحساب والدخول</button>
+        <label class="auth-check vx-auth-check"><input type="checkbox" checked> أوافق على شروط الاستخدام وسياسة الخصوصية</label>
+        <button class="primary-btn vx-login-submit vx-signup-submit" type="submit">إنشاء الحساب والدخول</button>
       </form>
-      <a class="outline-btn" style="width:100%" href="#/login">لدي حساب بالفعل</a>
-      <p>${icons.shield} تجربة آمنة ومشفرة</p>
+      <a class="outline-btn vx-login-secondary" href="#/login">لدي حساب بالفعل</a>
+      <p class="vx-login-safe">${icons.shield} تجربة آمنة ومشفرة</p>
     </section>
-    <section class="login-left"><h2><span class="gradient-text">ابدأ مجانا.</span><br>نظم اجتماعاتك وملفاتك من مكان واحد.</h2><p>سيتم إنشاء مساحة تجريبية لك مباشرة، ويمكنك تعديل بيانات الفريق لاحقا من الإعدادات.</p><div class="meeting-stage">${videoMockup()}${scheduleCard()}</div></section>
+    <section class="login-left vx-login-showcase" aria-label="واجهة اجتماعات Vexwyn">
+      <img src="assets/login-showcase-reference.png" alt="">
+    </section>
   </main>`;
 }
 
@@ -1717,3 +1721,4 @@ if (!window.__vexwynPopstateBound) {
 }
 
 route();
+
