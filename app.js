@@ -1715,6 +1715,87 @@ function meetings() {
     <div class="ux2-three-col"><aside>${leftAside()}</aside><section class="panel ux2-main-list">${filters()}${meetingRows()}</section><aside>${upgradePanel()}</aside></div>`);
 }
 
+function dashboard() {
+  return shell("dashboard", `
+    <section class="ux3-dashboard">
+      <div class="ux3-welcome">
+        <h1>مرحباً بعودتك، أحمد 👋</h1>
+        <p>إدارة اجتماعاتك وفرقك بسهولة وكفاءة.</p>
+      </div>
+      <section class="ux3-hero-row">
+        <aside class="panel ux3-quick">
+          <h3>إجراءات سريعة</h3>
+          <div>
+            ${[
+              ["▣", "اجتماع جديد", "new-meeting"],
+              ["↪", "انضم لاجتماع", "join-meeting"],
+              ["▦", "جدولة اجتماع", "schedule-meeting"],
+              ["▭", "مشاركة الشاشة", "screen-share"]
+            ].map(([icon, label, action]) => `<button type="button" data-app-action="${action}"><span>${icon}</span><b>${label}</b></button>`).join("")}
+          </div>
+        </aside>
+        <article class="panel ux3-next-meeting">
+          <div class="ux3-calendar-art"></div>
+          <div class="ux3-next-copy">
+            <span class="ux3-pill">الاجتماع القادم</span>
+            <h2>مراجعة خطة المشروع</h2>
+            <p>اليوم، 28 مايو 2024</p>
+            <button class="outline-btn" type="button" data-app-action="details">تفاصيل الاجتماع</button>
+          </div>
+          <div class="ux3-next-meta">
+            <span>10:00 - 11:00 ص</span>
+            <b>9 مشاركين</b>
+            <i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <button class="primary-btn ux3-join" type="button" data-app-action="join-meeting">انضم الآن ▣</button>
+        </article>
+      </section>
+      <section class="ux3-stat-row">
+        ${[
+          ["اجتماعات اليوم", "6", "▦", "+ 2"],
+          ["إجمالي الساعات", "48.5", "▦", "+ 15%"],
+          ["المشاركون النشطون", "128", "◷", "+ 12%"],
+          ["معدل الحضور", "92%", "◌", "+ 8%"]
+        ].map(([title, value, icon, delta], index) => `<article class="panel ux3-stat ${index === 3 ? "ux3-ring-stat" : ""}"><span>${icon}</span><small>${title}</small><strong>${value}</strong><em>${delta}</em><div></div></article>`).join("")}
+      </section>
+      <section class="ux3-lower-grid">
+        <article class="panel ux3-list">
+          <a>عرض الكل</a>
+          <h3>آخر التحديثات</h3>
+          ${["تمت مشاركة ملف جديد", "تم إنشاء اجتماع جديد", "أحمد خالد علّق على مهمة", "تم تحديث جدول الاجتماع"].map((row, index) => `<p><b>${row}</b><small>منذ ${index === 0 ? "10 دقائق" : index === 1 ? "25 دقيقة" : index === 2 ? "ساعة" : "ساعتين"}</small><i></i></p>`).join("")}
+        </article>
+        <article class="panel ux3-tasks">
+          <a>عرض الكل</a>
+          <h3>المهام</h3>
+          <div><span>إجمالي التقدم</span><b>65%</b></div>
+          ${["إعداد تقرير الأداء الشهري", "مراجعة خطة المشروع", "تصميم العرض التقديمي", "إعداد قائمة المشاركين"].map((row, index) => `<label><span>${row}</span><small>${index === 0 ? "اليوم" : "مايو " + (28 + index)}</small><input type="checkbox" ${index < 2 ? "checked" : ""}></label>`).join("")}
+          <button class="outline-btn" type="button" data-app-action="new-task">+ مهمة جديدة</button>
+        </article>
+        <article class="panel ux3-schedule">
+          <a>عرض التقويم</a>
+          <h3>جدول اليوم</h3>
+          ${[
+            ["10:00", "11:00", "مراجعة خطة المشروع", "9 مشاركين"],
+            ["12:00", "1:00", "جلسة تخطيط الربع القادم", "6 مشاركين"],
+            ["3:00", "4:00", "مراجعة التصميم النهائي", "4 مشاركين"],
+            ["5:00", "6:00", "اجتماع متابعة المهام", "3 مشاركين"]
+          ].map(([from, to, title, people]) => `<div><time>${from}<br>${to}</time><b>${title}</b><small>${people}</small><span>▣</span></div>`).join("")}
+        </article>
+        <article class="panel ux3-room">
+          <header><span>مباشر الآن ●</span><h3>الغرفة الحالية</h3></header>
+          <div class="ux3-room-video"><b>08:24</b></div>
+          <h4>مراجعة خطة المشروع</h4>
+          <p>9 مشاركين</p>
+          <div class="ux3-room-actions">
+            ${["⌕", "▣", "▭", "…"].map((icon) => `<button type="button" data-app-action="details">${icon}</button>`).join("")}
+            <button class="ux3-end" type="button" data-app-action="leave-meeting">⌕</button>
+          </div>
+        </article>
+      </section>
+    </section>
+  `);
+}
+
 if (!window.__vexwynPopstateBound) {
   window.addEventListener("popstate", route);
   window.__vexwynPopstateBound = true;
