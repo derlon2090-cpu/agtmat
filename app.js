@@ -766,21 +766,23 @@ function bindAppInteractions() {
 }
 
 function login() {
-  return `<div class="bg-orbit"></div><main class="login-page auth-page" dir="rtl">
-    <section class="login-card">
+  return `<div class="bg-orbit"></div><main class="login-page auth-page vx-login-page" dir="rtl">
+    <section class="login-card vx-login-card">
       ${brand()}<h1>تسجيل الدخول</h1><p>سجل دخولك للوصول إلى اجتماعاتك وإدارة فريقك بسهولة</p>
       <form id="login-form" novalidate>
         <div class="field"><label>البريد الإلكتروني</label><input name="email" type="email" placeholder="name@company.com"></div>
         <div class="field"><label>كلمة المرور</label><input name="password" placeholder="••••••••••••" type="password"></div>
         <div class="row-between"><button class="auth-link gradient-text" type="button" data-auth-demo>نسيت كلمة المرور؟</button><label><input type="checkbox" checked> تذكرني</label></div>
-        <button class="primary-btn" style="width:100%;margin:22px 0" type="submit">تسجيل الدخول</button>
+        <button class="primary-btn vx-login-submit" type="submit">تسجيل الدخول</button>
       </form>
-      <a class="outline-btn" style="width:100%" href="#/signup">إنشاء حساب جديد</a>
+      <a class="outline-btn vx-login-secondary" href="#/signup">إنشاء حساب جديد</a>
       <div class="row-between auth-divider"><span></span>أو<span></span></div>
-      <button class="outline-btn" style="width:100%" type="button" data-auth-demo>G المتابعة بحساب العمل</button>
-      <p>${icons.shield} دخول آمن ومشفر</p>
+      <button class="outline-btn vx-login-secondary vx-google-login" type="button" data-auth-demo><b>G</b> المتابعة بحساب العمل</button>
+      <p class="vx-login-safe">${icons.shield} دخول آمن ومشفر</p>
     </section>
-    <section class="login-left"><h2><span class="gradient-text">اجتماعات أكثر إنتاجية.</span><br>تواصل أوضح. فرق أقوى.</h2><p>من مكالمات الفيديو إلى إدارة المهام والتقويم، كل ما تحتاجه في منصة واحدة متكاملة.</p><div class="meeting-stage">${videoMockup()}${scheduleCard()}</div></section>
+    <section class="login-left vx-login-showcase" aria-label="واجهة اجتماعات Vexwyn">
+      <img src="assets/login-showcase-reference.png" alt="">
+    </section>
   </main>`;
 }
 
@@ -1199,21 +1201,23 @@ function bindAdmin() {
 }
 
 function login() {
-  return `<div class="bg-orbit"></div><main class="login-page auth-page" dir="rtl">
-    <section class="login-card">
+  return `<div class="bg-orbit"></div><main class="login-page auth-page vx-login-page" dir="rtl">
+    <section class="login-card vx-login-card">
       ${brand()}<h1>تسجيل الدخول</h1><p>سجل دخولك للوصول إلى اجتماعاتك وإدارة فريقك بسهولة</p>
       <form id="login-form" novalidate>
         <div class="field"><label>البريد الإلكتروني</label><input name="email" type="email" placeholder="name@company.com"></div>
         <div class="field"><label>كلمة المرور</label><input name="password" placeholder="••••••••••••" type="password"></div>
         <div class="row-between"><button class="auth-link gradient-text" type="button" data-auth-demo>نسيت كلمة المرور؟</button><label><input type="checkbox" checked> تذكرني</label></div>
-        <button class="primary-btn" style="width:100%;margin:22px 0" type="submit">تسجيل الدخول</button>
+        <button class="primary-btn vx-login-submit" type="submit">تسجيل الدخول</button>
       </form>
-      <a class="outline-btn" style="width:100%" href="#/signup">إنشاء حساب جديد</a>
+      <a class="outline-btn vx-login-secondary" href="#/signup">إنشاء حساب جديد</a>
       <div class="row-between auth-divider"><span></span>أو<span></span></div>
-      <button class="outline-btn" style="width:100%" type="button" data-auth-demo>G المتابعة بحساب العمل</button>
-      <p>${icons.shield} دخول آمن ومشفر</p>
+      <button class="outline-btn vx-login-secondary vx-google-login" type="button" data-auth-demo><b>G</b> المتابعة بحساب العمل</button>
+      <p class="vx-login-safe">${icons.shield} دخول آمن ومشفر</p>
     </section>
-    <section class="login-left"><h2><span class="gradient-text">اجتماعات أكثر إنتاجية.</span><br>تواصل أوضح. فرق أقوى.</h2><p>من مكالمات الفيديو إلى إدارة المهام والتقويم، كل ما تحتاجه في منصة واحدة متكاملة.</p><div class="meeting-stage">${videoMockup()}${scheduleCard()}</div></section>
+    <section class="login-left vx-login-showcase" aria-label="واجهة اجتماعات Vexwyn">
+      <img src="assets/login-showcase-reference.png" alt="">
+    </section>
   </main>`;
 }
 

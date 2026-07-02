@@ -3687,3 +3687,219 @@ button.mega-item {
 .vx2-home-grid .vx2-panel {
   direction: rtl;
 }
+
+/* Public login exactness pass requested on 2026-07-02 */
+.auth-page.vx-login-page {
+  min-height: 941px;
+  grid-template-columns: 646px 896px;
+  gap: 0;
+  justify-content: start;
+  align-items: start;
+  padding: 0;
+  background:
+    radial-gradient(circle at 91% 3%, rgba(138, 99, 255, .18), transparent 29%),
+    radial-gradient(circle at 3% 100%, rgba(111, 63, 255, .22), transparent 31%);
+  overflow: hidden;
+}
+
+.auth-page.vx-login-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 25% 47%, transparent 0 37%, rgba(128, 83, 255, .18) 37.2%, transparent 37.8%),
+    radial-gradient(ellipse at 96% 62%, transparent 0 32%, rgba(128, 83, 255, .16) 32.2%, transparent 32.8%),
+    linear-gradient(120deg, rgba(245, 239, 255, .98), rgba(255, 255, 255, .99) 43%, rgba(247, 242, 255, .98));
+}
+
+.auth-page.vx-login-page .vx-login-card {
+  position: fixed;
+  top: 42px;
+  left: 896px;
+  z-index: 2;
+  width: 646px;
+  height: 858px;
+  min-height: 858px;
+  box-sizing: border-box;
+  padding: 50px 64px 36px;
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid #ece6ff;
+  background: rgba(255, 255, 255, .96);
+  box-shadow: 0 30px 90px rgba(90, 43, 180, .14);
+}
+
+.auth-page.vx-login-page .login-card .brand {
+  margin-bottom: 24px;
+  justify-content: center;
+  gap: 16px;
+  font-size: 42px;
+  letter-spacing: 0;
+}
+
+.auth-page.vx-login-page .login-card .mark {
+  width: 58px;
+  height: 58px;
+}
+
+.auth-page.vx-login-page .login-card .mark::before {
+  font-size: 58px;
+}
+
+.auth-page.vx-login-page .login-card h1 {
+  margin: 0;
+  font-size: 54px;
+  line-height: 1.18;
+  font-weight: 900;
+  color: #111827;
+}
+
+.auth-page.vx-login-page .login-card > p:not(.vx-login-safe) {
+  margin: 14px 0 24px;
+  font-size: 20px;
+  line-height: 1.65;
+  color: #687287;
+}
+
+.auth-page.vx-login-page .field {
+  margin: 0 0 18px;
+}
+
+.auth-page.vx-login-page .field label {
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 900;
+  color: #111827;
+  text-align: right;
+}
+
+.auth-page.vx-login-page .field input {
+  height: 60px;
+  border-radius: 10px;
+  border: 1px solid #d8def0;
+  padding: 0 28px;
+  color: #1f2937;
+  font-size: 18px;
+  text-align: right;
+  background-color: #fff;
+  box-shadow: none;
+}
+
+.auth-page.vx-login-page .field input::placeholder {
+  color: #777;
+  opacity: 1;
+}
+
+.auth-page.vx-login-page .row-between {
+  min-height: 24px;
+  gap: 18px;
+  font-size: 18px;
+  color: #111827;
+}
+
+.auth-page.vx-login-page .row-between label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.auth-page.vx-login-page input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #2f80ff;
+}
+
+.auth-page.vx-login-page .auth-link {
+  color: #4b22ff;
+  font-size: 15px;
+  background: none;
+}
+
+.auth-page.vx-login-page .vx-login-submit {
+  width: 100%;
+  height: 60px;
+  margin: 14px 0 18px;
+  border-radius: 9px;
+  font-size: 18px;
+  font-weight: 900;
+  color: #fff;
+  background: linear-gradient(135deg, #5d27ff, #3514d7);
+  box-shadow: 0 20px 38px rgba(74, 29, 220, .23);
+}
+
+.auth-page.vx-login-page .vx-login-secondary {
+  width: 100%;
+  height: 58px;
+  border-radius: 9px;
+  border: 1px solid #d8cdfd;
+  background: #fff;
+  color: #3217c8;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.auth-page.vx-login-page .auth-divider {
+  margin: 22px 0;
+  color: #687287;
+  font-size: 21px;
+}
+
+.auth-page.vx-login-page .auth-divider span {
+  background: #e3dcf5;
+}
+
+.auth-page.vx-login-page .vx-google-login {
+  gap: 12px;
+}
+
+.auth-page.vx-login-page .vx-google-login b {
+  color: #2563eb;
+  font-size: 18px;
+}
+
+.auth-page.vx-login-page .vx-login-safe {
+  margin: 18px 0 0;
+  font-size: 18px;
+  color: #687287;
+}
+
+.auth-page.vx-login-page .vx-login-showcase {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 896px;
+  height: 941px;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.auth-page.vx-login-page .vx-login-showcase img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 1280px) {
+  .auth-page.vx-login-page {
+    grid-template-columns: minmax(420px, 646px);
+    padding: 32px 24px;
+  }
+
+  .auth-page.vx-login-page .vx-login-showcase {
+    display: none;
+  }
+
+  .auth-page.vx-login-page .vx-login-card {
+    position: static;
+    width: min(646px, 100%);
+    min-height: auto;
+    height: auto;
+    overflow: visible;
+  }
+}
