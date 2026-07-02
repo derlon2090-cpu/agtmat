@@ -3906,31 +3906,31 @@ button.mega-item {
 
 /* Signup page aligned with the 2026-07-02 login reference */
 .auth-page.vx-signup-page .vx-signup-card .brand {
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 
 .auth-page.vx-signup-page .vx-signup-card h1 {
-  font-size: 48px;
+  font-size: 44px;
   line-height: 1.12;
 }
 
 .auth-page.vx-signup-page .vx-signup-card > p:not(.vx-login-safe) {
-  margin: 12px 0 18px;
-  font-size: 18px;
-  line-height: 1.45;
+  margin: 10px 0 14px;
+  font-size: 17px;
+  line-height: 1.35;
 }
 
 .auth-page.vx-signup-page .vx-signup-card .field {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .auth-page.vx-signup-page .vx-signup-card .field label {
-  margin-bottom: 7px;
+  margin-bottom: 6px;
   font-size: 14px;
 }
 
 .auth-page.vx-signup-page .vx-signup-card .field input {
-  height: 50px;
+  height: 48px;
   font-size: 16px;
 }
 
@@ -3940,22 +3940,43 @@ button.mega-item {
   justify-content: flex-start;
   gap: 10px;
   width: 100%;
-  margin: 12px 0 0;
+  margin: 10px 0 0;
   color: #111827;
   font-size: 15px;
   font-weight: 800;
 }
 
 .auth-page.vx-signup-page .vx-signup-submit {
-  height: 58px;
-  margin: 16px 0 14px;
+  height: 56px;
+  margin: 14px 0 12px;
 }
 
 .auth-page.vx-signup-page .vx-login-secondary {
-  height: 56px;
+  height: 52px;
 }
 
 .auth-page.vx-signup-page .vx-login-safe {
-  margin-top: 16px;
-  font-size: 17px;
+  margin-top: 12px;
+  font-size: 16px;
+}
+
+@media (min-width: 1281px) {
+  .auth-page.vx-signup-page {
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+
+  .auth-page.vx-signup-page .vx-signup-card {
+    top: max(32px, calc((100vh - 812px) / 2));
+    height: min(812px, calc(100vh - 64px));
+    min-height: 0;
+    padding: clamp(28px, 4.8vh, 44px) 64px clamp(22px, 3.4vh, 30px);
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .auth-page.vx-signup-page .vx-signup-card::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
 }
